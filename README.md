@@ -1,3 +1,4 @@
 # IT202-bs92
-
-first commit
+Course section & number: IT202-102
+Name: Bassil Saleh
+About me: One of my favorite desserts is the tres leches cake.
