@@ -15,6 +15,13 @@ function getTotal($arr) {
         $total += $i;
     }
     //TODO do rounding stuff here (round to two decimals i.e., 0.10, 0.01, 0.00)
+    $total = round($total,2);
+    // If a float in PHP has a 0 in the hundredths place, 
+    // (i.e. $float = 0.10), then it will be echoed
+    // as "0.1" instead of "0.10". As far as I know,
+    // the only way to add a leading zero is to 
+    // format the float as a string.
+    $total = number_format($total,2,'.',',');
     echo "The total is " . var_export($total, true);
 }
 echo "Problem 2: Adding Floats<br>";
