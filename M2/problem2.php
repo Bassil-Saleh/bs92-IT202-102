@@ -8,6 +8,12 @@ function getTotal($arr) {
     $total = 0.00;
     //note: use the $arr variable, don't directly touch $a1-$a4
     //TODO do adding here
+    // Name: Bassil Saleh
+    // UCID: bs92
+    // Date: 2-16-2024
+    foreach($arr as $i) {
+        $total += $i;
+    }
     //TODO do rounding stuff here (round to two decimals i.e., 0.10, 0.01, 0.00)
     echo "The total is " . var_export($total, true);
 }
