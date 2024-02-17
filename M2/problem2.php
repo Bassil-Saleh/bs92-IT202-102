@@ -21,6 +21,12 @@ function getTotal($arr) {
     // as "0.1" instead of "0.10". As far as I know,
     // the only way to add a leading zero is to 
     // format the float as a string.
+    
+    // The last 2 parameters in number_format() are for 
+    // the decimal separator '.' and the thousands separator ','.
+    // In case the total sum happens to be at least 1000,
+    // it should still be formatted in English notation.
+    // i.e. $float = 2304.123 will be formatted as "2,304.12"
     $total = number_format($total,2,'.',',');
     echo "The total is " . var_export($total, true);
 }
