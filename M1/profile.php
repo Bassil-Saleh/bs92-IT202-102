@@ -7,11 +7,11 @@ nav ul {
   background-color: #333;
 }
 
-li {
+nav li {
   float: left;
 }
 
-li a {
+nav li a {
   display: block;
   color: white;
   text-align: center;
@@ -19,14 +19,21 @@ li a {
   text-decoration: none;
 }
 
-li a:hover {
+nav li a:hover {
   background-color: #111;
 }
 </style>
 
+
+
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
+
+<ul>
+    <li>item1</li>
+    <li>item2</li>
+</ul>
 
 <?php
 echo "<h2>Profile Page</h2>";
