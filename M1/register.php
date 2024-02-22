@@ -32,6 +32,7 @@ require(__DIR__ . "/partials/nav.php");
 //TODO 2: add PHP Code
 if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])) {
     $email = se($_POST, "email", "", false);
+    $username = se($_POST, "username", "", false);
     $password = se($_POST, "password", "", false);
     $confirm = se(
         $_POST,
@@ -75,9 +76,9 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         //TODO 4
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
+        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
-            $stmt->execute([":email" => $email, ":password" => $hash]);
+            $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             echo "Successfully registered!";
         } catch (Exception $e) {
             echo "There was a problem registering";
