@@ -24,8 +24,6 @@ nav li a:hover {
 }
 </style>
 
-
-
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
