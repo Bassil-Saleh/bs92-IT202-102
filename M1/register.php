@@ -8,7 +8,7 @@ require(__DIR__ . "/partials/nav.php");
     </div>
     <div>
         <label for="username">Username</label>
-        <input type="username" name="username" required />
+        <input type="text" name="username" required />
     </div>
     <div>
         <label for="pw">Password</label>
