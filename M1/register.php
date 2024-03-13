@@ -72,16 +72,38 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         $hasError = true;
     }
     if (!$hasError) {
-        echo "Welcome, $email";
+        //echo "Welcome, $email" . "<br>";
         //TODO 4
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
         $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
+            echo "Welcome, $email" . "<br>";
             echo "Successfully registered!";
         } catch (Exception $e) {
-            echo "There was a problem registering";
+            echo "There was a problem registering.<br>";
+            // Check if email already exists
+            //echo var_dump($email) . "<br>";
+            //echo var_dump($username) . "<br>";
+            $check_email_stmt = $db->prepare("SELECT 1 FROM Users WHERE email = :email");
+            $check_email_stmt->execute([":email" => $email]);
+            $result = $check_email_stmt->fetch();
+            $email_exists = (bool)$result;
+            //echo var_dump($bool_result);
+            if ($email_exists) {
+                echo "An account with the email address \"$email\" already exists.<br>";
+            }
+            // Check if username already exists
+            $check_username_stmt = $db->prepare("SELECT 1 FROM Users WHERE username = :username");
+            $check_username_stmt->execute([":username" => $username]);
+            $result = $check_username_stmt->fetch();
+            $username_exists = (bool)$result;
+            if ($username_exists) {
+                echo "An account with the username \"$username\" already exists.<br>";
+            }
+            //echo var_dump($result) . "<br>";
+            
             "<pre>" . var_export($e, true) . "</pre>";
         }
     }
