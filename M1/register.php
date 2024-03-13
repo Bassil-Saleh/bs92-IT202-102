@@ -88,7 +88,6 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
             $check_email_stmt->execute([":email" => $email]);
             $result = $check_email_stmt->fetch();
             $email_exists = (bool)$result;
-            //echo var_dump($bool_result);
             if ($email_exists) {
                 echo "An account with the email address \"$email\" already exists.<br>";
             }
