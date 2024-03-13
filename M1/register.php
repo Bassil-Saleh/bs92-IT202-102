@@ -84,8 +84,6 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         } catch (Exception $e) {
             echo "There was a problem registering.<br>";
             // Check if email already exists
-            //echo var_dump($email) . "<br>";
-            //echo var_dump($username) . "<br>";
             $check_email_stmt = $db->prepare("SELECT 1 FROM Users WHERE email = :email");
             $check_email_stmt->execute([":email" => $email]);
             $result = $check_email_stmt->fetch();
@@ -102,8 +100,6 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
             if ($username_exists) {
                 echo "An account with the username \"$username\" already exists.<br>";
             }
-            //echo var_dump($result) . "<br>";
-            
             "<pre>" . var_export($e, true) . "</pre>";
         }
     }
