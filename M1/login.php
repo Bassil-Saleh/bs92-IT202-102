@@ -29,22 +29,22 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     //TODO 3
     $hasError = false;
     if (empty($email)) {
-        echo "Email must not be empty";
+        echo "Email address must be non-empty.<br>";
         $hasError = true;
     }
     //sanitize
     $email = sanitize_email($email);
     //validate
     if (!is_valid_email($email)) {
-        echo "Invalid email address";
+        echo "Please enter a valid email address (i.e. username@host.com).<br>";
         $hasError = true;
     }
     if (empty($password)) {
-        echo "password must not be empty";
+        echo "Password must be non-empty.<br>";
         $hasError = true;
     }
     if (strlen($password) < 8) {
-        echo "Password too short";
+        echo "Password must be at least 8 characters long.<br>";
         $hasError = true;
     }
     if (!$hasError) {
@@ -59,7 +59,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                     $hash = $user["password"];
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
-                        echo "Weclome $email";
+                        echo "Welcome, $email!<br>";
                         $_SESSION["user"] = $user;
                         // Start of lines 71 to 86 from https://gist.github.com/MattToegel/c636eef64e82fcf6bd2102377de2e47a
                         try {
@@ -81,10 +81,10 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         // End of lines 71 to 86 from https://gist.github.com/MattToegel/c636eef64e82fcf6bd2102377de2e47a
                         die(header("Location: home.php"));
                     } else {
-                        echo "Invalid password";
+                        echo "Wrong password.<br>";
                     }
                 } else {
-                    echo "Email not found";
+                    echo "An account with this email address was not found.<br>";
                 }
             }
         } catch (Exception $e) {
