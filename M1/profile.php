@@ -2,10 +2,10 @@
 require(__DIR__ . "/partials/nav.php");
 ?>
 
-<ul>
+<!--<ul>
     <li>item1</li>
     <li>item2</li>
-</ul>
+</ul>-->
 
 <?php
 echo "<h2>Profile Page</h2>";
@@ -13,7 +13,7 @@ echo "<h2>Profile Page</h2>";
 if (is_logged_in()) {
     echo $_SESSION["user"]["email"];
 } else {
-    echo "You're not logged in";
+    echo "You're not logged in.";
 }
 ?>
 
@@ -27,7 +27,7 @@ if (isset($_POST["save"])) {
     $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
     try {
         $stmt->execute($params);
-        flash("Profile saved", "success");
+        flash("Profile saved.", "success");
     } catch (PDOException $e) {
         if ($e->errorInfo[1] === 1062) {
             //https://www.php.net/manual/en/function.preg-match.php
@@ -53,10 +53,10 @@ if (isset($_POST["save"])) {
             $_SESSION["user"]["email"] = $user["email"];
             $_SESSION["user"]["username"] = $user["username"];
         } else {
-            flash("User doesn't exist", "danger");
+            flash("User doesn't exist.", "danger");
         }
     } catch (Exception $e) {
-        flash("An unexpected error occurred, please try again", "danger");
+        flash("An unexpected error occurred, please try again.", "danger");
         //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
     }
 
@@ -81,16 +81,16 @@ if (isset($_POST["save"])) {
                             ":password" => password_hash($new_password, PASSWORD_BCRYPT)
                         ]);
 
-                        flash("Password reset", "success");
+                        flash("Password reset.", "success");
                     } else {
-                        flash("Current password is invalid", "warning");
+                        flash("Current password is invalid.", "warning");
                     }
                 }
             } catch (PDOException $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
         } else {
-            flash("New passwords don't match", "warning");
+            flash("New passwords don't match.", "warning");
         }
     }
 }
@@ -146,7 +146,7 @@ $username = get_username();
             //apply the CSS (these are bootstrap classes which we'll learn later)
             innerDiv.className = "alert alert-warning";
             //set the content
-            innerDiv.innerText = "Password and Confirm password must match";
+            innerDiv.innerText = "Password and Confirm password must match.";
 
             outerDiv.appendChild(innerDiv);
             //add the element to the DOM (if we don't it merely exists in memory)
