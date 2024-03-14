@@ -3,6 +3,7 @@ require(__DIR__ . "/partials/nav.php");
 ?>
 
 <?php
+// Display a message just after logging out
 if (!empty($_GET['status'])) {
     echo "You have logged out of your account.<br>";
 }
