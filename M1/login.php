@@ -1,6 +1,13 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
+
+<?php
+if (!empty($_GET['status'])) {
+    echo "You have logged out of your account.<br>";
+}
+?>
+
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
