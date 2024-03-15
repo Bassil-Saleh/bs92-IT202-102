@@ -19,3 +19,17 @@ function getMessages()
     }
     return array();
 }
+
+function displayFlashMessages() {
+    if (!isset($_SESSION['flash'])) {
+        return null;
+    }
+    $all_msg = getMessages();
+    foreach ($all_msg as $msg) {
+        $text = $msg['text'];
+        $color = $msg['color'];
+        $output = sprintf('<div class="%s">%s</div>',$color,$text);
+        echo $output;
+    }
+
+}
