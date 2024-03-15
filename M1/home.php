@@ -1,9 +1,9 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
+displayFlashMessages();
 ?>
 <h1>Home</h1>
 <?php
-//displayFlashMessages();
 if (is_logged_in()) {
     echo "Welcome, " . get_user_email() . "!<br>";
 } else {
