@@ -5,6 +5,7 @@ nav ul {
   padding: 0;
   overflow: hidden;
   background-color: #333;
+  border-radius: 12px;
 }
 
 nav li {
@@ -24,8 +25,30 @@ nav li a:hover {
   background-color: #111;
 }
 
+#login_email {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+#login_password {
+  margin-bottom: 12px;
+}
+
+#login_button {
+  padding: 12px 12px;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+#login_form {
+  padding: 16px 16px;
+}
+
 body {
   background-color: #FFFAF0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 </style>
 

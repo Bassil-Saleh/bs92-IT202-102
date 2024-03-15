@@ -9,16 +9,16 @@ if (!empty($_GET['status'])) {
 }
 ?>
 
-<form onsubmit="return validate(this)" method="POST">
-    <div>
+<form id="login_form" onsubmit="return validate(this)" method="POST">
+    <div id="login_email">
         <label for="email">Email</label>
         <input type="email" name="email" required />
     </div>
-    <div>
+    <div id="login_password">
         <label for="pw">Password</label>
         <input type="password" id="pw" name="password" required minlength="8" />
     </div>
-    <input type="submit" value="Login" />
+    <input id="login_button" type="submit" value="Login" />
 </form>
 <script>
     function validate(form) {
