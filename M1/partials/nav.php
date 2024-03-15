@@ -9,6 +9,7 @@ nav ul {
 
 nav li {
   float: left;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 nav li a {
