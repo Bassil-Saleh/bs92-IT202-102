@@ -28,12 +28,6 @@ nav li a:hover {
 .one_line_field {
   margin: 8px 16px;
 }
-/*#login_email {
-  margin: 8px 16px;
-}
-#login_password {
-  margin: 8px 16px;
-}*/
 .submit_button {
   margin: 8px 16px;
   padding: 12px 12px;
@@ -42,14 +36,6 @@ nav li a:hover {
   font-weight: bold;
   border-radius: 8px;
 }
-/*#login_button {
-  margin: 8px 16px;
-  padding: 12px 12px;
-  font-size: 16px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: bold;
-  border-radius: 8px;
-}*/
 #login_form {
   padding: 8px;
 }
@@ -61,6 +47,22 @@ nav li a:hover {
 
 #register_email {
   margin: 8px 16px;
+}
+
+#logout_message {
+  margin: 8px 24px;
+}
+
+/* Homepage */
+#homepage_welcome {
+  margin: 8px 24px;
+}
+#homepage_header {
+  margin: 8px 24px;
+}
+
+.warning {
+  margin: 8px 24px;
 }
 
 body {
