@@ -23,6 +23,10 @@ nav li a {
 nav li a:hover {
   background-color: #111;
 }
+
+body {
+  background-color: #FFFAF0;
+}
 </style>
 
 <?php
