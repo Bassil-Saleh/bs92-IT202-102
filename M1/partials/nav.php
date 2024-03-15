@@ -1,7 +1,7 @@
 <style>
 nav ul {
   list-style-type: none;
-  margin: 0;
+  margin: 12px 16px;
   padding: 0;
   overflow: hidden;
   background-color: #333;
@@ -17,33 +17,50 @@ nav li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 12px 16px;
   text-decoration: none;
 }
 
 nav li a:hover {
   background-color: #111;
 }
-
-#login_email {
-  margin-top: 12px;
-  margin-bottom: 12px;
+/* Login page elements */
+.one_line_field {
+  margin: 8px 16px;
 }
-
+/*#login_email {
+  margin: 8px 16px;
+}
 #login_password {
-  margin-bottom: 12px;
-}
-
-#login_button {
+  margin: 8px 16px;
+}*/
+.submit_button {
+  margin: 8px 16px;
   padding: 12px 12px;
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   border-radius: 8px;
 }
-
+/*#login_button {
+  margin: 8px 16px;
+  padding: 12px 12px;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  border-radius: 8px;
+}*/
 #login_form {
-  padding: 16px 16px;
+  padding: 8px;
+}
+
+/* Register page elements */
+#register_form {
+  padding: 8px;
+}
+
+#register_email {
+  margin: 8px 16px;
 }
 
 body {
