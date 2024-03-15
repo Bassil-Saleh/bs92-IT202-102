@@ -2,18 +2,13 @@
 require(__DIR__ . "/partials/nav.php");
 ?>
 
-<!--<ul>
-    <li>item1</li>
-    <li>item2</li>
-</ul>-->
-
 <?php
 echo "<h2>Profile Page</h2>";
 
 if (is_logged_in()) {
     echo $_SESSION["user"]["email"];
 } else {
-    echo "You're not logged in.";
+    echo "You cannot access this page unless you are logged in.";
 }
 ?>
 
@@ -100,6 +95,7 @@ if (isset($_POST["save"])) {
 $email = get_user_email();
 $username = get_username();
 ?>
+<?php if (is_logged_in()): ?>
 <form method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
         <label for="email">Email</label>
@@ -125,6 +121,7 @@ $username = get_username();
     </div>
     <input type="submit" value="Update Profile" name="save" />
 </form>
+<?php endif; ?>
 
 <script>
     function validate(form) {

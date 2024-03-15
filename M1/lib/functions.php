@@ -15,3 +15,20 @@ require(__DIR__ . "/user_helpers.php");
 //TODO 4: Flash Message Helpers
 require(__DIR__ . "/flash_messages.php");
 ?>
+
+<?php
+// This is a placeholder for the get_url() function.
+// Currently the pages create_role.php
+// and list_roles.php will throw a 
+// fatal error unless this function is defined.
+// It seems to be left over from code written 
+// by someone else (but for whatever reason 
+// isn't accessible anymore).
+// Until we get word from the instructor on what
+// this function is actually intended to do,
+// it will just return the passed parameter
+// for the time being.
+function get_url($string) {
+    return $string;
+}
+?>
