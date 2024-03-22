@@ -35,6 +35,7 @@
             /* 1.7: Extra styling */
             margin: 10px 50px 10px 10px;
             padding: 10px 0px;
+            border-radius: 12px;
         }
         nav li a:hover {
             /* 1.4: Make the links (or their surrounding area) change color on mouseover */
@@ -43,6 +44,8 @@
         /* 1.5: Change the "bullet points" of this entire list to checkmarks */
         h3+ul li {
             list-style-type:none;
+            /* 1.7: Extra styling */
+            padding-bottom: 4px;
         }
         h3+ul li::before {
             content:"\2713";
@@ -56,12 +59,17 @@
             /* Styling for each link in the navigation bar */
             padding: 10px 10px;
             text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 12px;
+            color:maroon;
         }
         h1, h2, h3 {
             padding: 10px 10px;
         }
         body {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: rgb(248, 248, 238);
         }
         
         
