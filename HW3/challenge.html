@@ -43,11 +43,18 @@
             /* 1.4: Make the links (or their surrounding area) change color on mouseover */
             background-color:darkkhaki
         }
-        /* 1.5: Change the "bullet points" of this entire list to checkmarks */
-        li ul li {
+        
+        /*li ul li {
             list-style-type: none;
         }
         li ul li::before {
+            content:"\2713";
+        }*/
+        /* 1.5: Change the "bullet points" of this entire list to checkmarks */
+        h3+ul li {
+            list-style-type:none;
+        }
+        h3+ul li::before {
             content:"\2713";
         }
     </style>
