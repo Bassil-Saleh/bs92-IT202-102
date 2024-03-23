@@ -14,8 +14,6 @@
         });
         function getCurrentSelection() {
             section_name = '';
-            //section_name = window.location.hash;
-            //section_name = section_name.slice(1,section_name.length);
             setTimeout(() => {
                 //added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
                 //TODO: add code for processing the current selection 
@@ -27,13 +25,8 @@
                 //Note: likely you'll want to call updateCurrentPage towards the end
             }, 100);
         }
-        //links = document.getElementsByTagName('a');
         window.addEventListener("click", function() {
             getCurrentSelection();
-            /*section_name = window.location.hash;
-            section_name = section_name.slice(1,section_name.length);
-            console.log(section_name);
-            updateCurrentPage(section_name);*/
         });
     </script>
     <style>
