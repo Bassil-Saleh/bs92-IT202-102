@@ -96,6 +96,28 @@ body {
 #list_roles_table {
   padding: 8px 24px;
 }
+#create_role_name {
+  padding: 8px 0px;
+}
+#create_role_description {
+  padding: 8px 0px;
+}
+.search_button {
+  margin: 8px 8px;
+  padding: 4px 4px;
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  border-radius: 8px;
+}
+.toggle_button {
+  margin: 8px 8px;
+  padding: 4px 4px;
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  border-radius: 8px;
+}
 </style>
 
 <?php

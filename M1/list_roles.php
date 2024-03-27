@@ -76,7 +76,7 @@ try {
                                 <?php /* if this is part of a search, lets persist the search criteria so it reloads correctly*/ ?>
                                 <input type="hidden" name="role" value="<?php se($search, null); ?>" />
                             <?php endif; ?>
-                            <input type="submit" value="Toggle" />
+                            <input id="list_roles_toggle_button" class="toggle_button" type="submit" value="Toggle" />
                         </form>
                     </td>
                 </tr>

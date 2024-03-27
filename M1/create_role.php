@@ -29,12 +29,12 @@ if (isset($_POST["name"]) && isset($_POST["description"])) {
 }
 ?>
 <h1 id="create_role_header" class="page_name_header">Create Role</h1>
-<form method="POST">
-    <div>
+<form id="create_role_form" class="input_form" method="POST">
+    <div id="create_role_name">
         <label for="name">Name</label>
         <input id="name" name="name" required />
     </div>
-    <div>
+    <div id="create_role_description">
         <label for="d">Description</label>
         <textarea name="description" id="d"></textarea>
     </div>
