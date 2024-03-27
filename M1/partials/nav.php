@@ -61,9 +61,6 @@ nav li a:hover {
 #homepage_welcome {
   margin: 8px 24px;
 }
-/*#homepage_header {
-  margin: 8px 24px;
-}*/
 #homepage_logged_out {
   margin: 8px 24px;
 }
@@ -85,9 +82,6 @@ body {
 #profile_logged_out {
   margin: 8px 24px;
 }
-/*#profile_header {
-  margin: 8px 24px;
-}*/
 #profile_email {
   margin: 8px 24px;
 }
@@ -99,15 +93,27 @@ body {
 }
 
 /* List Roles Page */
-#list_roles_table {
+table {
+  border-collapse: collapse;
+  margin: 8px 24px;
+}
+th {
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+th, td {
+  border: 1px solid black;
+  padding: 4px;
+}
+th {
+  background-color:burlywood;
+}
+td {
+  background-color:azure;
+}
+/*#list_roles_table {
   padding: 8px 24px;
-}
-#create_role_name {
-  padding: 8px 0px;
-}
-#create_role_description {
-  padding: 8px 0px;
-}
+}*/
 .search_button {
   margin: 8px 8px;
   padding: 4px 4px;
@@ -123,6 +129,13 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   border-radius: 8px;
+}
+/* Create Role Page */
+#create_role_name {
+  padding: 8px 0px;
+}
+#create_role_description {
+  padding: 8px 0px;
 }
 #create_role_submit_button {
   margin: 8px 0px;
