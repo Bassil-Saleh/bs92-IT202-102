@@ -55,9 +55,9 @@ nav li a:hover {
 #homepage_welcome {
   margin: 8px 24px;
 }
-#homepage_header {
+/*#homepage_header {
   margin: 8px 24px;
-}
+}*/
 #homepage_logged_out {
   margin: 8px 24px;
 }
@@ -68,7 +68,9 @@ nav li a:hover {
 .page_name_header {
   margin: 8px 24px;
 }
-
+.input_form {
+  margin: 8px 24px;
+}
 body {
   background-color: #FFFAF0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -77,9 +79,9 @@ body {
 #profile_logged_out {
   margin: 8px 24px;
 }
-#profile_header {
+/*#profile_header {
   margin: 8px 24px;
-}
+}*/
 #profile_email {
   margin: 8px 24px;
 }
@@ -88,6 +90,11 @@ body {
 }
 .mb-3 {
   margin: 8px 24px;
+}
+
+/* List Roles Page */
+#list_roles_table {
+  padding: 8px 24px;
 }
 </style>
 
