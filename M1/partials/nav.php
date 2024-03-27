@@ -54,10 +54,10 @@ nav li a:hover {
 }
 
 #logout_message {
-  margin: 8px 24px;
+  margin: 8px 32px;
 }
 .registration_msg {
-  margin: 8px 24px;
+  margin: 8px 32px;
 }
 
 /* Homepage */
