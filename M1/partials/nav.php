@@ -37,7 +37,13 @@ nav li a:hover {
 #login_form {
   padding: 8px;
 }
-
+.one_line_textfield {
+  font-family:'Courier New', Courier, monospace;
+}
+.multiline_textfield {
+  font-family:'Courier New', Courier, monospace;
+}
+/* End of login page elements */
 /* Register page elements */
 #register_form {
   padding: 8px;

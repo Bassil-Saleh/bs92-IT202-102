@@ -32,11 +32,11 @@ if (isset($_POST["name"]) && isset($_POST["description"])) {
 <form id="create_role_form" class="input_form" method="POST">
     <div id="create_role_name">
         <label for="name">Name</label>
-        <input id="name" name="name" required />
+        <input class="one_line_textfield" id="name" name="name" required />
     </div>
     <div id="create_role_description">
         <label for="d">Description</label>
-        <textarea name="description" id="d"></textarea>
+        <textarea class="multiline_textfield" name="description" id="d"></textarea>
     </div>
     <input id="create_role_submit_button" type="submit" value="Create Role" />
 </form>
