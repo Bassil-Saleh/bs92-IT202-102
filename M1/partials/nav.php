@@ -70,6 +70,13 @@ body {
   background-color: #FFFAF0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+/* Profile Page */
+#profile_logged_out {
+  margin: 8px 24px;
+}
+#profile_header {
+  margin: 8px 24px;
+}
 </style>
 
 <?php
