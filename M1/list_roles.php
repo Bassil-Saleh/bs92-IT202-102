@@ -44,10 +44,10 @@ try {
 }
 
 ?>
-<h1>List Roles</h1>
-<form method="POST">
+<h1 id="list_roles_header" class="page_name_header">List Roles</h1>
+<form id="role_filter_form" method="POST">
     <input type="search" name="role" placeholder="Role Filter" value="<?php se($_POST, "role");?>" />
-    <input type="submit" value="Search" />
+    <input id="role_filter_search_button" class="search_button" type="submit" value="Search" />
 </form>
 <table>
     <thead>

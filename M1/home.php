@@ -2,7 +2,7 @@
 require(__DIR__ . "/partials/nav.php");
 displayFlashMessages();
 ?>
-<h1 id="homepage_header">Home</h1>
+<h1 id="homepage_header" class="page_name_header">Home</h1>
 <?php
 if (is_logged_in()) {
     echo "<div id=\"homepage_welcome\">Welcome, " . get_user_email() . "!</div>";

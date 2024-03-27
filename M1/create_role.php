@@ -28,7 +28,7 @@ if (isset($_POST["name"]) && isset($_POST["description"])) {
     }
 }
 ?>
-<h1>Create Role</h1>
+<h1 id="create_role_header" class="page_name_header">Create Role</h1>
 <form method="POST">
     <div>
         <label for="name">Name</label>

@@ -65,6 +65,9 @@ nav li a:hover {
 .warning {
   margin: 8px 24px;
 }
+.page_name_header {
+  margin: 8px 24px;
+}
 
 body {
   background-color: #FFFAF0;

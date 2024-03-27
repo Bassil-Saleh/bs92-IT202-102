@@ -3,7 +3,7 @@ require(__DIR__ . "/partials/nav.php");
 ?>
 
 <?php
-echo "<h2 id=\"profile_header\">Profile Page</h2>";
+echo "<h2 id=\"profile_header\" class=\"page_name_header\">Profile Page</h2>";
 
 if (is_logged_in()) {
     //echo $_SESSION["user"]["email"];
