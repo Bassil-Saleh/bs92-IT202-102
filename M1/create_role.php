@@ -38,7 +38,7 @@ if (isset($_POST["name"]) && isset($_POST["description"])) {
         <label for="d">Description</label>
         <textarea name="description" id="d"></textarea>
     </div>
-    <input type="submit" value="Create Role" />
+    <input id="create_role_submit_button" type="submit" value="Create Role" />
 </form>
 <?php
 //note we need to go up 1 more directory

@@ -118,6 +118,14 @@ body {
   font-weight: bold;
   border-radius: 8px;
 }
+#create_role_submit_button {
+  margin: 8px 0px;
+  padding: 12px 12px;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  border-radius: 8px;
+}
 </style>
 
 <?php
