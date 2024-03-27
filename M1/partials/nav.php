@@ -24,10 +24,10 @@ nav li a:hover {
 }
 /* Login page elements */
 .one_line_field {
-  margin: 8px 16px;
+  margin: 8px 24px;
 }
 .submit_button {
-  margin: 8px 16px;
+  margin: 8px 24px;
   padding: 12px 12px;
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -44,7 +44,7 @@ nav li a:hover {
 }
 
 #register_email {
-  margin: 8px 16px;
+  margin: 8px 24px;
 }
 
 #logout_message {
@@ -75,6 +75,15 @@ body {
   margin: 8px 24px;
 }
 #profile_header {
+  margin: 8px 24px;
+}
+#profile_email {
+  margin: 8px 24px;
+}
+#profile_password_reset {
+  margin: 8px 24px;
+}
+.mb-3 {
   margin: 8px 24px;
 }
 </style>

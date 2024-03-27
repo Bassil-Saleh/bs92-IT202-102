@@ -6,7 +6,8 @@ require(__DIR__ . "/partials/nav.php");
 echo "<h2 id=\"profile_header\">Profile Page</h2>";
 
 if (is_logged_in()) {
-    echo $_SESSION["user"]["email"];
+    //echo $_SESSION["user"]["email"];
+    echo "<div id=\"profile_email\">" . $_SESSION["user"]["email"] . "</div>";
 } else {
     echo "<div id=\"profile_logged_out\">You cannot access this page unless you are logged in.</div>";
 }
@@ -96,7 +97,7 @@ $email = get_user_email();
 $username = get_username();
 ?>
 <?php if (is_logged_in()): ?>
-<form method="POST" onsubmit="return validate(this);">
+<form id="profile_form" method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="<?php se($email); ?>" />
@@ -106,7 +107,7 @@ $username = get_username();
         <input type="text" name="username" id="username" value="<?php se($username); ?>" />
     </div>
     <!-- DO NOT PRELOAD PASSWORD -->
-    <div>Password Reset</div>
+    <div id="profile_password_reset">Password Reset</div>
     <div class="mb-3">
         <label for="cp">Current Password</label>
         <input type="password" name="currentPassword" id="cp" />
@@ -119,7 +120,7 @@ $username = get_username();
         <label for="conp">Confirm Password</label>
         <input type="password" name="confirmPassword" id="conp" />
     </div>
-    <input type="submit" value="Update Profile" name="save" />
+    <input id="update_profile_button" class="submit_button" type="submit" value="Update Profile" name="save" />
 </form>
 <?php endif; ?>
 
