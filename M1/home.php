@@ -7,7 +7,7 @@ displayFlashMessages();
 if (is_logged_in()) {
     echo "<div id=\"homepage_welcome\">Welcome, " . get_user_email() . "!</div>";
 } else {
-    echo "You're not logged in.";
+    echo "<div id=\"homepage_logged_out\">You're not logged in.</div>";
 }
 //shows session info
 //echo "<pre>" . var_export($_SESSION, true) . "</pre>";

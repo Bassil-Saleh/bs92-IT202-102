@@ -1,4 +1,5 @@
 <style>
+/* Navigation bar styling: */
 nav ul {
   list-style-type: none;
   margin: 12px 16px;
@@ -7,12 +8,10 @@ nav ul {
   background-color: #333;
   border-radius: 12px;
 }
-
 nav li {
   float: left;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 nav li a {
   display: block;
   color: white;
@@ -20,7 +19,6 @@ nav li a {
   padding: 12px 16px;
   text-decoration: none;
 }
-
 nav li a:hover {
   background-color: #111;
 }
@@ -58,6 +56,9 @@ nav li a:hover {
   margin: 8px 24px;
 }
 #homepage_header {
+  margin: 8px 24px;
+}
+#homepage_logged_out {
   margin: 8px 24px;
 }
 
