@@ -56,6 +56,9 @@ nav li a:hover {
 #logout_message {
   margin: 8px 24px;
 }
+.registration_msg {
+  margin: 8px 24px;
+}
 
 /* Homepage */
 #homepage_welcome {
