@@ -151,7 +151,7 @@ td {
 </style>
 
 <?php
-session_start();
+//session_start();
 //Note: this is to resolve cookie issues with port numbers
 $domain = $_SERVER["HTTP_HOST"];
 if (strpos($domain, ":")) {
@@ -161,7 +161,7 @@ $localWorks = true; //some people have issues with localhost for the cookie para
 //if you're one of those people make this false
 
 //this is an extra condition added to "resolve" the localhost issue for the session cookie
-if (($localWorks && $domain == "localhost") || $domain != "localhost") {
+/*if (($localWorks && $domain == "localhost") || $domain != "localhost") {
     session_set_cookie_params([
         "lifetime" => 60 * 60,
         "path" => "/Project",
@@ -171,7 +171,7 @@ if (($localWorks && $domain == "localhost") || $domain != "localhost") {
         "httponly" => true,
         "samesite" => "lax"
     ]);
-}
+}*/
 require_once(__DIR__ . "/../lib/functions.php");
 
 ?>
