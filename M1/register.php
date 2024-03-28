@@ -1,24 +1,24 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
-<form onsubmit="return validate(this)" method="POST">
-    <div>
+<form id="register_form" onsubmit="return validate(this)" method="POST">
+    <div id="register_email" class="one_line_field">
         <label for="email">Email</label>
-        <input type="email" name="email" required />
+        <input class="one_line_textfield" type="email" name="email" required />
     </div>
-    <div>
+    <div id="register_username" class="one_line_field">
         <label for="username">Username</label>
-        <input type="text" name="username" required />
+        <input class="one_line_textfield" type="text" name="username" required />
     </div>
-    <div>
+    <div id="register_password" class="one_line_field">
         <label for="pw">Password</label>
-        <input type="password" id="pw" name="password" required minlength="8" />
+        <input class="one_line_textfield" type="password" id="pw" name="password" required minlength="8" />
     </div>
-    <div>
+    <div id="register_confirm_password" class="one_line_field">
         <label for="confirm">Confirm</label>
-        <input type="password" name="confirm" required minlength="8" />
+        <input class="one_line_textfield" type="password" name="confirm" required minlength="8" />
     </div>
-    <input type="submit" value="Register" />
+    <input id="register_button" class="submit_button" type="submit" value="Register" />
 </form>
 <script>
     function validate(form) {
@@ -79,17 +79,17 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
-            echo "Welcome, $email" . "<br>";
-            echo "Successfully registered!";
+            echo "<div class=\"registration_msg\">Welcome, $email.</div>";
+            echo "<div class=\"registration_msg\">Successfully registered!</div>";
         } catch (Exception $e) {
-            echo "There was a problem registering.<br>";
+            echo "<div class=\"registration_msg\">There was a problem registering.</div>";
             // Check if email already exists
             $check_email_stmt = $db->prepare("SELECT 1 FROM Users WHERE email = :email");
             $check_email_stmt->execute([":email" => $email]);
             $result = $check_email_stmt->fetch();
             $email_exists = (bool)$result;
             if ($email_exists) {
-                echo "An account with the email address \"$email\" already exists.<br>";
+                echo "<div class=\"registration_msg\">An account with the email address \"$email\" already exists.</div>";
             }
             // Check if username already exists
             $check_username_stmt = $db->prepare("SELECT 1 FROM Users WHERE username = :username");
@@ -97,7 +97,7 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
             $result = $check_username_stmt->fetch();
             $username_exists = (bool)$result;
             if ($username_exists) {
-                echo "An account with the username \"$username\" already exists.<br>";
+                echo "<div class=\"registration_msg\">An account with the username \"$username\" already exists.</div>";
             }
             "<pre>" . var_export($e, true) . "</pre>";
         }

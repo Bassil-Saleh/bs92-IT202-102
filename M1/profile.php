@@ -3,12 +3,13 @@ require(__DIR__ . "/partials/nav.php");
 ?>
 
 <?php
-echo "<h2>Profile Page</h2>";
+echo "<h2 id=\"profile_header\" class=\"page_name_header\">Profile Page</h2>";
 
 if (is_logged_in()) {
-    echo $_SESSION["user"]["email"];
+    //echo $_SESSION["user"]["email"];
+    echo "<div id=\"profile_email\">" . $_SESSION["user"]["email"] . "</div>";
 } else {
-    echo "You cannot access this page unless you are logged in.";
+    echo "<div id=\"profile_logged_out\">You cannot access this page unless you are logged in.</div>";
 }
 ?>
 
@@ -96,30 +97,30 @@ $email = get_user_email();
 $username = get_username();
 ?>
 <?php if (is_logged_in()): ?>
-<form method="POST" onsubmit="return validate(this);">
+<form id="profile_form" method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="<?php se($email); ?>" />
+        <input class="one_line_textfield" type="email" name="email" id="email" value="<?php se($email); ?>" />
     </div>
     <div class="mb-3">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="<?php se($username); ?>" />
+        <input class="one_line_textfield" type="text" name="username" id="username" value="<?php se($username); ?>" />
     </div>
     <!-- DO NOT PRELOAD PASSWORD -->
-    <div>Password Reset</div>
+    <div id="profile_password_reset">Password Reset</div>
     <div class="mb-3">
         <label for="cp">Current Password</label>
-        <input type="password" name="currentPassword" id="cp" />
+        <input class="one_line_textfield" type="password" name="currentPassword" id="cp" />
     </div>
     <div class="mb-3">
         <label for="np">New Password</label>
-        <input type="password" name="newPassword" id="np" />
+        <input class="one_line_textfield" type="password" name="newPassword" id="np" />
     </div>
     <div class="mb-3">
         <label for="conp">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="conp" />
+        <input class="one_line_textfield" type="password" name="confirmPassword" id="conp" />
     </div>
-    <input type="submit" value="Update Profile" name="save" />
+    <input id="update_profile_button" class="submit_button" type="submit" value="Update Profile" name="save" />
 </form>
 <?php endif; ?>
 
