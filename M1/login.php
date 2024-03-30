@@ -37,22 +37,22 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     //TODO 3
     $hasError = false;
     if (empty($email)) {
-        echo "Email address must be non-empty.<br>";
+        echo "<div class=\"warning\">Email address must be non-empty.</div>";
         $hasError = true;
     }
     //sanitize
     $email = sanitize_email($email);
     //validate
     if (!is_valid_email($email)) {
-        echo "Please enter a valid email address (i.e. username@host.com).<br>";
+        echo "<div class=\"warning\">Please enter a valid email address (i.e. username@host.com).</div>";
         $hasError = true;
     }
     if (empty($password)) {
-        echo "Password must be non-empty.<br>";
+        echo "<div class=\"warning\">Password must be non-empty.</div>";
         $hasError = true;
     }
     if (strlen($password) < 8) {
-        echo "Password must be at least 8 characters long.<br>";
+        echo "<div class=\"warning\">Password must be at least 8 characters long.</div>";
         $hasError = true;
     }
     if (!$hasError) {
@@ -89,10 +89,10 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         // End of lines 71 to 86 from https://gist.github.com/MattToegel/c636eef64e82fcf6bd2102377de2e47a
                         die(header("Location: home.php"));
                     } else {
-                        echo "Wrong password.<br>";
+                        echo "<div class=\"warning\">Wrong password.</div>";
                     }
                 } else {
-                    echo "An account with this email address was not found.<br>";
+                    echo "<div class=\"warning\">An account with this email address was not found.</div>";
                 }
             }
         } catch (Exception $e) {
