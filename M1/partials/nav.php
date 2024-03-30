@@ -67,7 +67,9 @@ nav li a:hover {
 #homepage_logged_out {
   margin: 8px 24px;
 }
-
+.user_role_msg {
+  margin: 8px 24px;
+}
 .alert {
   margin: 8px 24px;
 }
