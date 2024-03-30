@@ -7,6 +7,7 @@ echo "<h2 id=\"profile_header\" class=\"page_name_header\">Profile Page</h2>";
 
 if (is_logged_in()) {
     //echo $_SESSION["user"]["email"];
+    // Assuming the email/username change succeeded, these two <div> elements should update after a refresh.
     echo "<div id=\"profile_email\">" . "<span class=\"current_profile_info\">Current email: </span>" . $_SESSION["user"]["email"] . "</div>";
     echo "<div id=\"profile_username\">" . "<span class=\"current_profile_info\">Current username: </span>" . $_SESSION["user"]["username"] . "</div>";
 } else {
