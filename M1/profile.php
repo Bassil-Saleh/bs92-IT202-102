@@ -23,8 +23,10 @@ if (isset($_POST["save"])) {
     $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
     $db = getDB();
     $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
-    // Don't try to update the email if the user 
-    // entered an invalid one (i.e. missing a top-level domain).
+    // Don't try to update the email or username if the user 
+    // entered an invalid one (i.e. missing a top-level domain)
+    // or left the field completely blank.
+    // Otherwise the user won't be able to log back into their account.
     $valid_email = true;
     if (empty($email)) {
         flash("\"Change Email To:\" field must be non-empty.", "warning");
