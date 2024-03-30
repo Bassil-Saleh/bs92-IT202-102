@@ -23,24 +23,44 @@ if (isset($_POST["save"])) {
     $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
     $db = getDB();
     $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
-    try {
-        $stmt->execute($params);
-        flash("New email/username saved.", "success");
-    } catch (PDOException $e) {
-        // As of this writing, the Exception class in PHP doesn't have an errorInfo property,
-        // hence why $e's type was changed to PDOException.
-        if ($e->errorInfo[1] === 1062) {
-            //https://www.php.net/manual/en/function.preg-match.php
-            preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
-            if (isset($matches[1])) {
-                flash("The " . $matches[1] . " you entered is already being used by another account.", "warning");
+    // Don't try to update the email or username if the user 
+    // entered an invalid one (i.e. missing a top-level domain)
+    // or left the field completely blank.
+    // Otherwise the user won't be able to log back into their account.
+    $valid_email = true;
+    if (empty($email)) {
+        flash("\"Change Email To:\" field must be non-empty.", "warning");
+        $valid_email = false;
+    }
+    if (!is_valid_email($email)) {
+        flash("Please enter a valid email address (i.e. username@host.com).","warning");
+        $valid_email = false;
+    }
+    $valid_username = true;
+    if (empty($username)) {
+        flash("\"Change Username To:\" field must be non-empty.", "warning");
+        $valid_username = false;
+    }
+    if ($valid_email && $valid_username) {
+        try {
+            $stmt->execute($params);
+            flash("New email/username saved.", "success");
+        } catch (PDOException $e) {
+            // As of this writing, the Exception class in PHP doesn't have an errorInfo property,
+            // hence why $e's type was changed to PDOException.
+            if ($e->errorInfo[1] === 1062) {
+                //https://www.php.net/manual/en/function.preg-match.php
+                preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
+                if (isset($matches[1])) {
+                    flash("The " . $matches[1] . " you entered is already being used by another account.", "warning");
+                } else {
+                    //TODO come up with a nice error message
+                    echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                }
             } else {
                 //TODO come up with a nice error message
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
-        } else {
-            //TODO come up with a nice error message
-            echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
         }
     }
     //select fresh data from table
