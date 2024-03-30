@@ -68,6 +68,9 @@ nav li a:hover {
   margin: 8px 24px;
 }
 
+.alert {
+  margin: 8px 24px;
+}
 .warning {
   margin: 8px 24px;
 }
