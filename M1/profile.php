@@ -7,7 +7,8 @@ echo "<h2 id=\"profile_header\" class=\"page_name_header\">Profile Page</h2>";
 
 if (is_logged_in()) {
     //echo $_SESSION["user"]["email"];
-    echo "<div id=\"profile_email\">" . $_SESSION["user"]["email"] . "</div>";
+    echo "<div id=\"profile_email\">" . "<span class=\"current_profile_info\">Current email: </span>" . $_SESSION["user"]["email"] . "</div>";
+    echo "<div id=\"profile_username\">" . "<span class=\"current_profile_info\">Current username: </span>" . $_SESSION["user"]["username"] . "</div>";
 } else {
     echo "<div id=\"profile_logged_out\">You cannot access this page unless you are logged in.</div>";
 }
@@ -23,13 +24,13 @@ if (isset($_POST["save"])) {
     $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
     try {
         $stmt->execute($params);
-        flash("Profile saved.", "success");
+        flash("New email/username saved.", "success");
     } catch (PDOException $e) {
         if ($e->errorInfo[1] === 1062) {
             //https://www.php.net/manual/en/function.preg-match.php
             preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
             if (isset($matches[1])) {
-                flash("The chosen " . $matches[1] . " is not available.", "warning");
+                flash("The " . $matches[1] . " you entered is already being used by another account.", "warning");
             } else {
                 //TODO come up with a nice error message
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
@@ -79,7 +80,7 @@ if (isset($_POST["save"])) {
 
                         flash("Password reset.", "success");
                     } else {
-                        flash("Current password is invalid.", "warning");
+                        flash("Cannot reset password because wrong password was entered in the \"Current Password\" field.", "warning");
                     }
                 }
             } catch (PDOException $e) {
@@ -99,25 +100,25 @@ $username = get_username();
 <?php if (is_logged_in()): ?>
 <form id="profile_form" method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
-        <label for="email">Email</label>
+        <label for="email">Change Email To:</label>
         <input class="one_line_textfield" type="email" name="email" id="email" value="<?php se($email); ?>" />
     </div>
     <div class="mb-3">
-        <label for="username">Username</label>
+        <label for="username">Change Username To:</label>
         <input class="one_line_textfield" type="text" name="username" id="username" value="<?php se($username); ?>" />
     </div>
     <!-- DO NOT PRELOAD PASSWORD -->
     <div id="profile_password_reset">Password Reset</div>
     <div class="mb-3">
-        <label for="cp">Current Password</label>
+        <label for="cp">Current Password:</label>
         <input class="one_line_textfield" type="password" name="currentPassword" id="cp" />
     </div>
     <div class="mb-3">
-        <label for="np">New Password</label>
+        <label for="np">New Password:</label>
         <input class="one_line_textfield" type="password" name="newPassword" id="np" />
     </div>
     <div class="mb-3">
-        <label for="conp">Confirm Password</label>
+        <label for="conp">Confirm New Password:</label>
         <input class="one_line_textfield" type="password" name="confirmPassword" id="conp" />
     </div>
     <input id="update_profile_button" class="submit_button" type="submit" value="Update Profile" name="save" />
