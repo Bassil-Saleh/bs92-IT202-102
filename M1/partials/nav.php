@@ -67,7 +67,12 @@ nav li a:hover {
 #homepage_logged_out {
   margin: 8px 24px;
 }
-
+.user_role_msg {
+  margin: 8px 24px;
+}
+.alert {
+  margin: 8px 24px;
+}
 .warning {
   margin: 8px 24px;
 }
@@ -88,8 +93,15 @@ body {
 #profile_email {
   margin: 8px 24px;
 }
+#profile_username {
+  margin: 8px 24px;
+}
+.current_profile_info {
+  font-weight: bold;
+}
 #profile_password_reset {
   margin: 8px 24px;
+  font-weight: bold;
 }
 .mb-3 {
   margin: 8px 24px;
