@@ -145,7 +145,7 @@ $username = get_username();
             //apply the CSS (these are bootstrap classes which we'll learn later)
             innerDiv.className = "alert alert-warning";
             //set the content
-            innerDiv.innerText = "The \"New Password\" and \"Confirm Password\" fields must match.";
+            innerDiv.innerText = "Cannot reset your password because the \"New Password\" and \"Confirm Password\" fields do not match.";
 
             outerDiv.appendChild(innerDiv);
             //add the element to the DOM (if we don't it merely exists in memory)
