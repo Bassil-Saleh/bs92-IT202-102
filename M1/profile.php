@@ -27,6 +27,8 @@ if (isset($_POST["save"])) {
         $stmt->execute($params);
         flash("New email/username saved.", "success");
     } catch (PDOException $e) {
+        // As of this writing, the Exception class in PHP doesn't have an errorInfo property,
+        // hence why $e's type was changed to PDOException.
         if ($e->errorInfo[1] === 1062) {
             //https://www.php.net/manual/en/function.preg-match.php
             preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
@@ -85,6 +87,8 @@ if (isset($_POST["save"])) {
                     }
                 }
             } catch (PDOException $e) {
+                // Exception class doesn't have an errorInfo property, so $e
+                // was changed to a PDOException object.
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
         } else {
