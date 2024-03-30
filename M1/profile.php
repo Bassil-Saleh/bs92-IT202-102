@@ -80,7 +80,7 @@ if (isset($_POST["save"])) {
 
                         flash("Password reset.", "success");
                     } else {
-                        flash("Cannot reset password because wrong password was entered in the \"Current Password\" field.", "warning");
+                        flash("Cannot reset your password because the wrong password was entered in the \"Current Password\" field.", "warning");
                     }
                 }
             } catch (PDOException $e) {
