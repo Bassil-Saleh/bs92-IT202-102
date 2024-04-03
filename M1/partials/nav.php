@@ -163,7 +163,7 @@ td {
 </style>
 
 <?php
-//session_start();
+session_start();
 //Note: this is to resolve cookie issues with port numbers
 $domain = $_SERVER["HTTP_HOST"];
 if (strpos($domain, ":")) {
