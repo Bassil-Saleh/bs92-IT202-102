@@ -18,7 +18,7 @@ if (!empty($_GET['status'])) {
         <label for="pw">Password</label>
         <input class="one_line_textfield" type="password" id="pw" name="password" required minlength="8" />
     </div>
-    <input id="login_button" class="submit_button" type="submit" value="Login" />
+    <input id="login_button" class="submit_button" type="submit" name="submit" value="Login" />
 </form>
 <script>
     function validate(form) {
