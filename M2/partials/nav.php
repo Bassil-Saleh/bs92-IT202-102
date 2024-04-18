@@ -1,6 +1,6 @@
 <style>
 /* Navigation bar styling: */
-nav ul {
+nav.navigation_bar ul {
   list-style-type: none;
   margin: 12px 16px;
   padding: 0;
@@ -8,19 +8,28 @@ nav ul {
   background-color: #333;
   border-radius: 12px;
 }
-nav li {
+nav.navigation_bar li {
   float: left;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-nav li a {
+nav.navigation_bar li a {
   display: block;
   color: white;
   text-align: center;
   padding: 12px 16px;
   text-decoration: none;
 }
-nav li a:hover {
+nav.navigation_bar li a:hover {
   background-color: #111;
+}
+/* Dashboard Menu styling */
+nav.dashboard_menu ul {
+  list-style-type: none;
+  width: 256px;
+  background-color: #FFFAF0;
+}
+nav.dashboard_menu li a {
+  display: block;
 }
 /* Login page elements */
 .one_line_field {
@@ -187,7 +196,7 @@ $localWorks = true; //some people have issues with localhost for the cookie para
 require_once(__DIR__ . "/../lib/functions.php");
 
 ?>
-<nav>
+<nav class="navigation_bar">
     <ul>
         <?php if (is_logged_in()) : ?>
             <li><a href="home.php">Home</a></li>
