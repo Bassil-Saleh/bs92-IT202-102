@@ -25,12 +25,40 @@ nav.navigation_bar li a:hover {
 /* Dashboard Menu styling */
 nav.dashboard_menu ul {
   list-style-type: none;
-  width: 256px;
-  background-color: #FFFAF0;
+  margin: 16px 24px;
+  padding: 0;
+  width: 160px;
+  background-color: burlywood;
+  border-radius: 12px;
 }
 nav.dashboard_menu li a {
   display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #333;
 }
+nav.dashboard_menu li a:hover {
+  background-color: #B2936C;
+  border-radius: 12px;
+}
+
+/*nav.dashboard_menu ul {
+  list-style-type: none;
+  margin: 12px 16px;
+  padding: 0;
+  width: 256px;
+  background-color: burlywood;
+  border-radius: 12px;
+}
+nav.dashboard_menu li a {
+  display: block;
+  margin: 12px 16px;
+  padding: 8px 0px;
+  background-color: burlywood;
+}
+nav.dashboard_menu li a:hover {
+  background-color: azure;
+}*/
 /* Login page elements */
 .one_line_field {
   margin: 8px 24px;
