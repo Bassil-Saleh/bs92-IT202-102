@@ -39,26 +39,9 @@ nav.dashboard_menu li a {
 }
 nav.dashboard_menu li a:hover {
   background-color: #B2936C;
+  color: white;
   border-radius: 12px;
 }
-
-/*nav.dashboard_menu ul {
-  list-style-type: none;
-  margin: 12px 16px;
-  padding: 0;
-  width: 256px;
-  background-color: burlywood;
-  border-radius: 12px;
-}
-nav.dashboard_menu li a {
-  display: block;
-  margin: 12px 16px;
-  padding: 8px 0px;
-  background-color: burlywood;
-}
-nav.dashboard_menu li a:hover {
-  background-color: azure;
-}*/
 /* Login page elements */
 .one_line_field {
   margin: 8px 24px;
@@ -228,7 +211,7 @@ require_once(__DIR__ . "/../lib/functions.php");
     <ul>
         <?php if (is_logged_in()) : ?>
             <li><a href="home.php">Home</a></li>
-            <li><a href="profile.php">Profile</a></li>
+            <!--<li><a href="profile.php">Profile</a></li>-->
             <li><a href="dashboard.php">Dashboard</a></li>
         <?php endif; ?>
         <?php if (is_logged_in() && has_role("Admin")) : ?>

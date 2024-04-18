@@ -9,6 +9,6 @@ require(__DIR__ . "/partials/nav.php");
         <li><a href="#">Deposit</a></li>
         <li><a href="#">Withdraw</a></li>
         <li><a href="#">Transfer</a></li>
-        <li><a href="#">Profile</a></li>
+        <li><a href="profile.php">Profile</a></li>
     </ul>
 </nav>
