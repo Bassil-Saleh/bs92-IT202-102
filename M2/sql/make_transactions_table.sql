@@ -1,0 +1,12 @@
+-- Active: 1707348080693@@db.ethereallab.app@3306@bs92
+CREATE TABLE IF NOT EXISTS `Transactions` (
+    `id` INT NOT NULL AUTO INCREMENT,
+    `account_src` INT DEFAULT NULL,
+    `account_dest` INT DEFAULT NULL,
+    `balance_change` DECIMAL(19,4) NOT NULL DEFAULT 0,
+    `transaction_type` VARCHAR(255) DEFAULT NULL,
+    `memo` VARCHAR(255) DEFAULT NULL,
+    `expected_total` DECIMAL(19,4) NOT NULL DEFAULT 0,
+    `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+);
