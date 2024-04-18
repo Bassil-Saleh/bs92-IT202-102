@@ -27,7 +27,7 @@ nav.dashboard_menu ul {
   list-style-type: none;
   margin: 16px 24px;
   padding: 0;
-  width: 160px;
+  width: 212px;
   background-color: burlywood;
   border-radius: 12px;
 }
