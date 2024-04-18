@@ -1,6 +1,6 @@
 -- Active: 1707348080693@@db.ethereallab.app@3306@bs92
 CREATE TABLE IF NOT EXISTS `Transactions` (
-    `id` INT NOT NULL AUTO INCREMENT,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `account_src` INT DEFAULT NULL,
     `account_dest` INT DEFAULT NULL,
     `balance_change` DECIMAL(19,4) NOT NULL DEFAULT 0,
