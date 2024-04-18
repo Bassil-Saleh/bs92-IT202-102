@@ -9,4 +9,7 @@ CREATE TABLE IF NOT EXISTS `Transactions` (
     `expected_total` DECIMAL(19,4) NOT NULL DEFAULT 0,
     `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`account_src`) REFERENCES `Accounts` (`id`),
+    FOREIGN KEY (`account_dest`) REFERENCES `Accounts` (`id`)
 );
