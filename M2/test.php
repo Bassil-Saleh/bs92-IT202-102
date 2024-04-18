@@ -2,6 +2,22 @@
 require(__DIR__ . "/partials/nav.php");
 ?>
 <h2>Cars</h2>
+
+<form>
+    <div class="one_line_field">
+        <label for="make">Make</label>
+        <input class="one_line_textfield" type="text" name="make" required />
+    </div>
+    <div class="one_line_field">
+        <label for="model">Model</label>
+        <input class="one_line_textfield" type="text" name="model" required />
+    </div>
+    <div class="one_line_field">
+        <label for="year">Year</label>
+        <input class="one_line_textfield" type="text" name="year" required />
+    </div>
+    <input class="submit_button" type="submit" value="Add Car" />
+</form>
 <table>
     <tr>
         <th>Make</th>
@@ -28,6 +44,22 @@ require(__DIR__ . "/partials/nav.php");
         }
     } catch (Exception $e) {
         echo var_dump($e);
+    }
+    if (isset($_GET['make']) && isset($_GET['model']) && isset($_GET['year'])) {
+        $make = $_GET['make'];
+        $model = $_GET['model'];
+        $year = $_GET['year'];
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO Cars (make, model, year) VALUES(:make, :model, :year)");
+        try {
+            $stmt->execute(["make" => $make, "model" => $model, "year" => $year]);
+            echo "Car inserted.";
+        } catch (Exception $e) {
+            echo "There was a problem inserting your car into the table.";
+            echo "<pre>" . var_export($e, true) . "</pre>";
+            //flash("There was a problem inserting your car into the table.", "warning");
+        }
+        //echo $_GET['make'] . " " . $_GET['model'] . " " . $_GET['year'];
     }
     ?>
 </table>
