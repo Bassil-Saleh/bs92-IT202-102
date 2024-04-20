@@ -1,15 +1,6 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
-<h1 class="page_name_header">Create Bank Account</h1>
-<div id="create_account_instructions">An account number will be automatically generated for you once you hit the "Make Checking Account" button.</div>
-<form id="create_bank_account_form" method="POST">
-    <div id="initial_deposit_field" class="one_line_field">
-        <label name="initial_deposit">Initial Deposit ($5 to $1,000,000):</label>
-        <input class="one_line_textfield" type="number" name="initial_deposit" min="5" max="1000000" value="5" step="0.01" required>
-    </div>
-    <input class="submit_button" type=submit value="Make Checking Account">
-</form>
 <?php
 if (isset($_POST["initial_deposit"])) {
     $initial_deposit = se($_POST, "initial_deposit", "", false);
@@ -54,8 +45,9 @@ if (isset($_POST["initial_deposit"])) {
             // Try making a new record in the `Accounts` table with the new account #.
             $stmt = $db->prepare("INSERT INTO Accounts (account_number, user_id, balance, account_type) VALUES (:account_number, :user_id, :balance, :account_type)");
             $stmt->execute(["account_number" => $account_num, "user_id" => $user_id, "balance" => $initial_deposit, "account_type" => "checking"]);
-            //flash("Account #$account_num successfully created.", "success");
-            echo var_dump($account_num);
+            flash("New bank account successfully created.", "success");
+            die(header("Location: dashboard.php"));
+            //echo var_dump($account_num);
         } catch (Exception $e) {
             echo "<div class=\"create_account_msg\">An error occured with inserting the account into the database.</div>";
         }
@@ -63,3 +55,12 @@ if (isset($_POST["initial_deposit"])) {
     }
 }
 ?>
+<h1 class="page_name_header">Create Bank Account</h1>
+<div id="create_account_instructions">An account number will be automatically generated for you once you hit the "Make Checking Account" button.</div>
+<form id="create_bank_account_form" method="POST">
+    <div id="initial_deposit_field" class="one_line_field">
+        <label name="initial_deposit">Initial Deposit ($5 to $1,000,000):</label>
+        <input class="one_line_textfield" type="number" name="initial_deposit" min="5" max="1000000" value="5" step="0.01" required>
+    </div>
+    <input class="submit_button" type=submit value="Make Checking Account">
+</form>
