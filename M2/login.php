@@ -1,25 +1,12 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
-
 <?php
 // Display a message just after logging out
 if (!empty($_GET['status'])) {
     echo "<div id=\"logout_message\">You have logged out of your account.</div>";
 }
 ?>
-
-<form id="login_form" onsubmit="return validate(this)" method="POST">
-    <div id="login_email" class="one_line_field">
-        <label for="email">Email</label>
-        <input class="one_line_textfield" type="email" name="email" required />
-    </div>
-    <div id="login_password" class="one_line_field">
-        <label for="pw">Password</label>
-        <input class="one_line_textfield" type="password" id="pw" name="password" required minlength="8" />
-    </div>
-    <input id="login_button" class="submit_button" type="submit" name="submit" value="Login" />
-</form>
 <script>
     function validate(form) {
         //TODO 1: implement JavaScript validation
@@ -101,3 +88,14 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     }
 }
 ?>
+<form id="login_form" onsubmit="return validate(this)" method="POST">
+    <div id="login_email" class="one_line_field">
+        <label for="email">Email</label>
+        <input class="one_line_textfield" type="email" name="email" required />
+    </div>
+    <div id="login_password" class="one_line_field">
+        <label for="pw">Password</label>
+        <input class="one_line_textfield" type="password" id="pw" name="password" required minlength="8" />
+    </div>
+    <input id="login_button" class="submit_button" type="submit" name="submit" value="Login" />
+</form>
