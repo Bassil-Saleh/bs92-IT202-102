@@ -36,8 +36,47 @@ if (isset($_POST["initial_deposit"])) {
                 $row_count = $stmt->rowCount();
             } while ($row_count != 0);
             // Try making a new record in the `Accounts` table with the new account #.
-            $stmt = $db->prepare("INSERT INTO Accounts (account_number, user_id, balance, account_type) VALUES (:account_number, :user_id, :balance, :account_type)");
-            $stmt->execute(["account_number" => $account_num, "user_id" => $user_id, "balance" => $initial_deposit, "account_type" => "checking"]);
+            // Don't update the account's balance directly; make a transaction pair
+            // between the new bank account and the world bank account.
+            $stmt = $db->prepare("INSERT INTO Accounts (account_number, user_id, account_type) VALUES (:account_number, :user_id, :account_type)");
+            $stmt->execute(["account_number" => $account_num, "user_id" => $user_id, "account_type" => "checking"]);
+            // Now make a transaction pair between the new user account and the world account.
+            $memo = "Initial deposit for new account";
+            $transaction_type = "deposit";
+            // Get the id # of the world account from `Accounts`
+            $stmt = $db->prepare("SELECT id FROM Accounts WHERE account_type = \"world\"");
+            $stmt->execute();
+            $result = $stmt->fetch();
+            $world_id = $result["id"];
+            // Get the id # of the new account from `Accounts`
+            $stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
+            $stmt->execute(["account_number" => $account_num]);
+            $result = $stmt->fetch();
+            $new_acct_id = $result["id"];
+            // Withdraw money from the world account (using $initial_deposit).
+            // World account balance change = (current world account balance) - (initial deposit)
+            $stmt = $db->prepare("SELECT `balance` FROM `Accounts` WHERE `account_type` = \"world\"");
+            $stmt->execute();
+            $result = $stmt->fetch();
+            $world_acct_curr_bal = $result["balance"];
+            $world_acct_curr_bal -= $initial_deposit;
+            
+            // Insert the 1st transaction pair into the `Transactions` table.
+            $stmt = $db->prepare("INSERT INTO `Transactions` (`account_src`, `account_dest`, `balance_change`, `transaction_type`, `memo`, `expected_total`) VALUES (:account_src, :account_dest, :balance_change, :transaction_type, :memo, :expected_total)");
+            $stmt->execute(["account_src" => $new_acct_id, "account_dest" => $world_id, "balance_change" => -$initial_deposit, "transaction_type" => $transaction_type, "memo" => $memo, "expected_total" => $world_acct_curr_bal]);
+            // Now update the world account's balance after inserting the 1st half of the transaction pair.
+            $stmt = $db->prepare("UPDATE Accounts SET balance = :new_bal WHERE id = :world_id");
+            $stmt->execute(["new_bal" => $world_acct_curr_bal, "world_id" => $world_id]);
+
+            // Make the 2nd half of the transaction pair.
+            $stmt = $db->prepare("INSERT INTO `Transactions` (`account_src`, `account_dest`, `balance_change`, `transaction_type`, `memo`, `expected_total`) VALUES (:account_src, :account_dest, :balance_change, :transaction_type, :memo, :expected_total)");
+            $stmt->execute(["account_src" => $world_id, "account_dest" => $new_acct_id, "balance_change" => $initial_deposit, "transaction_type" => $transaction_type, "memo" => $memo, "expected_total" => $initial_deposit]);
+            // Update the new account's balance with the initial deposit.
+            $stmt = $db->prepare("UPDATE Accounts SET balance = :new_bal WHERE id = :new_acct_id");
+            $stmt->execute(["new_bal" => $initial_deposit, "new_acct_id" => $new_acct_id]);
+
+            // $stmt = $db->prepare("INSERT INTO Accounts (account_number, user_id, balance, account_type) VALUES (:account_number, :user_id, :balance, :account_type)");
+            // $stmt->execute(["account_number" => $account_num, "user_id" => $user_id, "balance" => $initial_deposit, "account_type" => "checking"]);
             flash("New bank account successfully created.", "success");
             die(header("Location: dashboard.php"));
         } catch (Exception $e) {
