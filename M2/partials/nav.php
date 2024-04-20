@@ -180,6 +180,10 @@ td {
   font-weight: bold;
   border-radius: 8px;
 }
+/* Make Bank Account Page */
+#create_account_instructions {
+  padding: 8px 24px;
+}
 </style>
 
 <?php
