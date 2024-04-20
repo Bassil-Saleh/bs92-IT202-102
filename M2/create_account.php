@@ -24,12 +24,6 @@ if (isset($_POST["initial_deposit"])) {
             $stmt->execute(["username" => $username]);
             $result = $stmt->fetch();
             $user_id = $result["id"]; // From `Users` table
-            // TEST CODE: Uncomment/remove once done
-            // $stmt = $db->prepare("SELECT * FROM `Accounts` WHERE `account_number` = \"000000000001\"");
-            // $stmt->execute();
-            // $row_count = $stmt->rowCount();
-            // echo var_dump($row_count);
-            // END OF TEST CODE
             $row_count = 0;
             do {
                 // Generate a random 12-digit account number with leading zeroes.
@@ -41,17 +35,14 @@ if (isset($_POST["initial_deposit"])) {
                 $stmt->execute(["account_number" => $account_num]);
                 $row_count = $stmt->rowCount();
             } while ($row_count != 0);
-            //echo var_dump($account_num);
             // Try making a new record in the `Accounts` table with the new account #.
             $stmt = $db->prepare("INSERT INTO Accounts (account_number, user_id, balance, account_type) VALUES (:account_number, :user_id, :balance, :account_type)");
             $stmt->execute(["account_number" => $account_num, "user_id" => $user_id, "balance" => $initial_deposit, "account_type" => "checking"]);
             flash("New bank account successfully created.", "success");
             die(header("Location: dashboard.php"));
-            //echo var_dump($account_num);
         } catch (Exception $e) {
             echo "<div class=\"create_account_msg\">An error occured with inserting the account into the database.</div>";
         }
-        //$stmt = $db->prepare("INSERT INTO Accounts (`account_number`, `user_id`, `balance`, `account_type`)");
     }
 }
 ?>
