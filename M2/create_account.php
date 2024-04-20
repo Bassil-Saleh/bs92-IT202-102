@@ -51,6 +51,11 @@ if (isset($_POST["initial_deposit"])) {
                 $row_count = $stmt->rowCount();
             } while ($row_count != 0);
             //echo var_dump($account_num);
+            // Try making a new record in the `Accounts` table with the new account #.
+            $stmt = $db->prepare("INSERT INTO Accounts (account_number, user_id, balance, account_type) VALUES (:account_number, :user_id, :balance, :account_type)");
+            $stmt->execute(["account_number" => $account_num, "user_id" => $user_id, "balance" => $initial_deposit, "account_type" => "checking"]);
+            //flash("Account #$account_num successfully created.", "success");
+            echo var_dump($account_num);
         } catch (Exception $e) {
             echo "<div class=\"create_account_msg\">An error occured with inserting the account into the database.</div>";
         }
