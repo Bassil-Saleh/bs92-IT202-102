@@ -13,6 +13,10 @@ require(__DIR__ . "/partials/nav.php");
 <?php
 if (isset($_POST["initial_deposit"])) {
     $initial_deposit = se($_POST, "initial_deposit", "", false);
-    echo var_dump($initial_deposit);
+    //echo var_dump($initial_deposit);
+    $account_num = rand(1,999999999999); // Account #000000000000 is reserved for the world account
+    $account_num = sprintf('%012d', $account_num); // Add leading zeroes
+    //echo var_dump($account_num);
+    
 }
 ?>
