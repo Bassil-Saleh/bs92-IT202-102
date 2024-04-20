@@ -13,10 +13,48 @@ require(__DIR__ . "/partials/nav.php");
 <?php
 if (isset($_POST["initial_deposit"])) {
     $initial_deposit = se($_POST, "initial_deposit", "", false);
-    //echo var_dump($initial_deposit);
-    $account_num = rand(1,999999999999); // Account #000000000000 is reserved for the world account
-    $account_num = sprintf('%012d', $account_num); // Add leading zeroes
-    //echo var_dump($account_num);
-    
+    // In case the HTML validation doesn't catch invalid input:
+    $hasError = false;
+    if (empty($initial_deposit)) {
+        echo "<div class=\"create_account_msg\">Initial deposit must not be empty.</div>";
+        $hasError = true;
+    }
+    if (($initial_deposit < 5) || ($initial_deposit > 1000000)) {
+        echo "<div class=\"create_account_msg\">Initial deposit must be between $5 to $1,000,000 (inclusive).</div>";
+        $hasError = true;
+    }
+    if (!$hasError) {
+        $username = $_SESSION["user"]["username"];
+        $db = getDB();
+        // Retrieve the user's ID # from the `Users` table
+        $stmt = $db->prepare("SELECT id FROM Users WHERE username = :username");
+        try {
+            // Retrieve the user's ID # from the `Users` table
+            $stmt->execute(["username" => $username]);
+            $result = $stmt->fetch();
+            $user_id = $result["id"]; // From `Users` table
+            // TEST CODE: Uncomment/remove once done
+            // $stmt = $db->prepare("SELECT * FROM `Accounts` WHERE `account_number` = \"000000000001\"");
+            // $stmt->execute();
+            // $row_count = $stmt->rowCount();
+            // echo var_dump($row_count);
+            // END OF TEST CODE
+            $row_count = 0;
+            do {
+                // Generate a random 12-digit account number with leading zeroes.
+                $account_num = rand(1,999999999999); // Account #000000000000 is reserved for the world account
+                $account_num = sprintf('%012d', $account_num); // Add leading zeroes
+                // If the account number already exists in the `Accounts` table, 
+                // then regenerate a new one and try again; keep trying until no collision occurs.
+                $stmt = $db->prepare("SELECT * FROM Accounts WHERE account_number = :account_number");
+                $stmt->execute(["account_number" => $account_num]);
+                $row_count = $stmt->rowCount();
+            } while ($row_count != 0);
+            //echo var_dump($account_num);
+        } catch (Exception $e) {
+            echo "<div class=\"create_account_msg\">An error occured with inserting the account into the database.</div>";
+        }
+        //$stmt = $db->prepare("INSERT INTO Accounts (`account_number`, `user_id`, `balance`, `account_type`)");
+    }
 }
 ?>

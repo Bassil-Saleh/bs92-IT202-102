@@ -184,6 +184,9 @@ td {
 #create_account_instructions {
   padding: 8px 24px;
 }
+.create_account_msg {
+  padding: 8px 24px;
+}
 </style>
 
 <?php
