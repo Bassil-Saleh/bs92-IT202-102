@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
+displayFlashMessages();
 ?>
 <h1 class="page_name_header">Dashboard</h1>
 <nav class="dashboard_menu">

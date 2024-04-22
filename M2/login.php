@@ -54,7 +54,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                     $hash = $user["password"];
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
-                        echo "Welcome, $email!<br>";
+                        
                         $_SESSION["user"] = $user;
                         // Start of lines 71 to 86 from https://gist.github.com/MattToegel/c636eef64e82fcf6bd2102377de2e47a
                         try {
@@ -75,6 +75,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         }
                         // End of lines 71 to 86 from https://gist.github.com/MattToegel/c636eef64e82fcf6bd2102377de2e47a
                         die(header("Location: home.php"));
+                        echo "Welcome, $email!<br>";
                     } else {
                         echo "<div class=\"warning\">Wrong password.</div>";
                     }

@@ -96,6 +96,9 @@ nav.dashboard_menu li a:hover {
 .warning {
   margin: 8px 24px;
 }
+.success {
+  margin: 8px 24px;
+}
 .page_name_header {
   margin: 8px 24px;
 }
@@ -179,6 +182,13 @@ td {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   border-radius: 8px;
+}
+/* Make Bank Account Page */
+#create_account_instructions {
+  padding: 8px 24px;
+}
+.create_account_msg {
+  padding: 8px 24px;
 }
 </style>
 
