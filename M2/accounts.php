@@ -18,14 +18,6 @@ try {
         $result = $stmt->execute(["user_id" => $user_id]);
         if ($result) {
             $records = $stmt->fetchALL(PDO::FETCH_ASSOC);
-            /*foreach ($records as $account) {
-                echo "<tr>";
-                echo "<td>" . $account['account_number'] . "</td>";
-                echo "<td>" . $account['account_type'] . "</td>";
-                echo "<td>" . $account['balance'] . "</td>";
-                echo "<td>" . $account['modified'] . "</td>";
-                echo "</tr>";
-            }*/
         }
     } catch (Exception $e) {
         echo var_dump($e);
@@ -59,8 +51,4 @@ try {
             <?php endforeach;?>
         <?php endif;?>
     </tbody>
-    <tr>
-        
-        
-    </tr>
 </table>
