@@ -43,7 +43,7 @@ try {
         <?php else:?>
             <?php foreach($records as $account):?>
                 <tr>
-                    <td><?php se($account['account_number']);?></td>
+                    <td><a href="transaction_history.php"><?php se($account['account_number']);?></a></td>
                     <td><?php se($account['account_type']);?></td>
                     <td><?php se($account['balance']);?></td>
                     <td><?php se($account['modified']);?></td>
