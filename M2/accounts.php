@@ -19,7 +19,7 @@ require(__DIR__ . "/partials/nav.php");
             $result = $stmt->fetch();
             $user_id = $result["id"]; // From `Users` table
             // Now retrieve the accounts associated with the logged in user
-            $stmt = $db->prepare("SELECT `account_number`, `account_type`, `balance`, `modified` FROM `Accounts` WHERE (`user_id` = :user_id) AND (NOT `account_type` = \"world\") ORDER BY `id` LIMIT 5");
+            $stmt = $db->prepare("SELECT `account_number`, `account_type`, `balance`, `modified` FROM `Accounts` WHERE (`user_id` = :user_id) AND (NOT `account_type` = \"world\") ORDER BY `id`");
             try {
                 $result = $stmt->execute(["user_id" => $user_id]);
                 if ($result) {

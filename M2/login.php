@@ -7,14 +7,6 @@ if (!empty($_GET['status'])) {
     echo "<div id=\"logout_message\">You have logged out of your account.</div>";
 }
 ?>
-<script>
-    function validate(form) {
-        //TODO 1: implement JavaScript validation
-        //ensure it returns false for an error and true for success
-
-        return true;
-    }
-</script>
 <?php
 //TODO 2: add PHP Code
 if (isset($_POST["email"]) && isset($_POST["password"])) {
@@ -89,6 +81,14 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     }
 }
 ?>
+<script>
+    function validate(form) {
+        //TODO 1: implement JavaScript validation
+        //ensure it returns false for an error and true for success
+
+        return true;
+    }
+</script>
 <form id="login_form" onsubmit="return validate(this)" method="POST">
     <div id="login_email" class="one_line_field">
         <label for="email">Email</label>
