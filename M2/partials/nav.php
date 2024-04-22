@@ -148,6 +148,7 @@ th {
 }
 td {
   background-color:azure;
+  font-family:'Courier New', Courier, monospace;
 }
 /*#list_roles_table {
   padding: 8px 24px;
