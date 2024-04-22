@@ -191,6 +191,10 @@ td {
 .create_account_msg {
   padding: 8px 24px;
 }
+/* Transaction History page */
+#transaction_history_go_back {
+  padding: 8px 24px;
+}
 </style>
 
 <?php
