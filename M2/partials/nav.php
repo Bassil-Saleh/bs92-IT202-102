@@ -96,6 +96,9 @@ nav.dashboard_menu li a:hover {
 .warning {
   margin: 8px 24px;
 }
+.success {
+  margin: 8px 24px;
+}
 .page_name_header {
   margin: 8px 24px;
 }
