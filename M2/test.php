@@ -2,6 +2,21 @@
 require(__DIR__ . "/partials/nav.php");
 ?>
 <?php if (isset($_GET['carid'])) : ?>
+    <?php
+        $db = getDB();
+        $stmt = $db->prepare("SELECT id, make, model , year FROM Cars WHERE id=:carid");
+        try {
+            $r = $stmt->execute(["carid" => $_GET['carid']]);
+            if ($r) {
+                $records = $stmt->fetchALL(PDO::FETCH_ASSOC);
+                foreach ($records as $car) {
+                    echo "<h4>" . $car['make'] . "</h4>";
+                }
+            }
+        } catch (Exception $e) {
+            echo var_dump($e);
+        }
+    ?>
     <h1>
         <?php echo $_GET['carid'] ?>
     </h1>
