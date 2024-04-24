@@ -1,6 +1,27 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
+<?php if (isset($_GET['carid'])) : ?>
+    <?php
+        $db = getDB();
+        $stmt = $db->prepare("SELECT id, make, model , year FROM Cars WHERE id=:carid");
+        try {
+            $r = $stmt->execute(["carid" => $_GET['carid']]);
+            if ($r) {
+                $records = $stmt->fetchALL(PDO::FETCH_ASSOC);
+                foreach ($records as $car) {
+                    echo "<h4>" . $car['make'] . "</h4>";
+                }
+            }
+        } catch (Exception $e) {
+            echo var_dump($e);
+        }
+    ?>
+    <h1>
+        <?php echo $_GET['carid'] ?>
+    </h1>
+<?php else : ?>
+
 <h2>Cars</h2>
 
 <form>
@@ -26,7 +47,7 @@ require(__DIR__ . "/partials/nav.php");
     </tr>
     <?php
     $db = getDB();
-    $stmt = $db->prepare("SELECT make, model, year FROM Cars");
+    $stmt = $db->prepare("SELECT id, make, model, year FROM Cars");
     try {
         $result = $stmt->execute();
         if ($result) {
@@ -34,11 +55,13 @@ require(__DIR__ . "/partials/nav.php");
             $records = $stmt->fetchALL(PDO::FETCH_ASSOC);
             //echo var_dump($records) . "<br>";
             foreach($records as $car) {
+                //echo "<a href=test.php?carid=" . $car['id'] . ">";
                 echo "<tr>";
-                echo "<td>" . $car['make'] . "</td>";
+                echo '<td><a href=test.php?carid=' . $car['id'] . '>' . $car['make'] . "</td>";
                 echo "<td>" . $car['model'] . "</td>";
                 echo "<td>" . $car['year'] . "</td>";
-                echo "</tr>";
+                echo "</tr></a>";
+                //echo "</tr></a>";
             }
             //echo "</table>";
         }
@@ -63,6 +86,7 @@ require(__DIR__ . "/partials/nav.php");
     }
     ?>
 </table>
+<?php endif;?>
 <?php
 /*$db = getDB();
 $stmt = $db->prepare("SELECT make, model, year FROM Cars");
