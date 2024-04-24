@@ -1,6 +1,12 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
+<?php if (isset($_GET['carid'])) : ?>
+    <h1>
+        <?php echo $_GET['carid'] ?>
+    </h1>
+<?php else : ?>
+
 <h2>Cars</h2>
 
 <form>
@@ -63,6 +69,7 @@ require(__DIR__ . "/partials/nav.php");
     }
     ?>
 </table>
+<?php endif;?>
 <?php
 /*$db = getDB();
 $stmt = $db->prepare("SELECT make, model, year FROM Cars");
