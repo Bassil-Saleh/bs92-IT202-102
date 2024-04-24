@@ -32,7 +32,7 @@ require(__DIR__ . "/partials/nav.php");
     </tr>
     <?php
     $db = getDB();
-    $stmt = $db->prepare("SELECT make, model, year FROM Cars");
+    $stmt = $db->prepare("SELECT id, make, model, year FROM Cars");
     try {
         $result = $stmt->execute();
         if ($result) {
@@ -40,11 +40,13 @@ require(__DIR__ . "/partials/nav.php");
             $records = $stmt->fetchALL(PDO::FETCH_ASSOC);
             //echo var_dump($records) . "<br>";
             foreach($records as $car) {
+                //echo "<a href=test.php?carid=" . $car['id'] . ">";
                 echo "<tr>";
-                echo "<td>" . $car['make'] . "</td>";
+                echo '<td><a href=test.php?carid=' . $car['id'] . '>' . $car['make'] . "</td>";
                 echo "<td>" . $car['model'] . "</td>";
                 echo "<td>" . $car['year'] . "</td>";
-                echo "</tr>";
+                echo "</tr></a>";
+                //echo "</tr></a>";
             }
             //echo "</table>";
         }
