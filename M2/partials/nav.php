@@ -210,8 +210,14 @@ td {
   font-size: 16px;
   display: inline;
 }
+/* Deposit and Withdraw page */
+input.radio_option {
+  margin: 8px 0px 8px 24px;
+}
+select {
+  margin: 8px 24px;
+}
 </style>
-
 <?php
 session_start();
 //Note: this is to resolve cookie issues with port numbers
