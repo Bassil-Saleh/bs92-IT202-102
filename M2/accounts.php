@@ -43,7 +43,16 @@ try {
         <?php else:?>
             <?php foreach($records as $account):?>
                 <tr>
-                    <td><?php se($account['account_number']);?></td>
+                    <td>
+                        <!-- Style the POST HTML form for each account number as if it were a link. -->
+                        <form method="POST" action="transaction_history.php" class="clickable_account_number_form">
+                            <input type="hidden" value="<?php se($account['account_number']) ?>" name="account_number">
+                            <button type="submit" name="account_number" value="<?php se($account['account_number']) ?>" class="account_number_button" formmethod="post">
+                                <?php se($account['account_number']);?>
+                            </button>
+                        </form>
+                    </td>
+                    <!--<td><a href="transaction_history.php"></a></td>-->
                     <td><?php se($account['account_type']);?></td>
                     <td><?php se($account['balance']);?></td>
                     <td><?php se($account['modified']);?></td>

@@ -142,6 +142,7 @@ th {
 th, td {
   border: 1px solid black;
   padding: 4px;
+  font-size: 16px;
 }
 th {
   background-color:burlywood;
@@ -190,6 +191,24 @@ td {
 }
 .create_account_msg {
   padding: 8px 24px;
+}
+/* Transaction History Page */
+#transaction_history_go_back {
+  padding: 8px 24px;
+}
+/* Accounts Page */
+.clickable_account_number_form {
+  display: inline;
+}
+.account_number_button {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 16px;
+  display: inline;
 }
 </style>
 
