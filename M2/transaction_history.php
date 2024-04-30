@@ -30,4 +30,17 @@ if (isset($_POST)) {
     }
 }
 ?>
+<table>
+    <thead>
+        <tr>
+            <th>Source Account</th>
+            <th>Destination Account</th>
+            <th>Transaction Type</th>
+            <th>Balance Change</th>
+            <th>Date of Transaction</th>
+            <th>Expected Total</th>
+            <th>Memo</th>
+        </tr>
+    </thead>
+</table>
 <div id="transaction_history_go_back"><a href="accounts.php">Back to My Accounts</a></div>
