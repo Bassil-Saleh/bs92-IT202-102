@@ -46,8 +46,8 @@ try {
                     <td>
                         <!-- Style the POST HTML form for each account number as if it were a link. -->
                         <form method="POST" action="transaction_history.php" class="clickable_account_number_form">
-                            <input type="hidden">
-                            <button type="submit" name="account_number" value="<?php $account['account_number'] ?>" class="account_number_button" formmethod="post">
+                            <input type="hidden" value="<?php se($account['account_number']) ?>" name="account_number">
+                            <button type="submit" name="account_number" value="<?php se($account['account_number']) ?>" class="account_number_button" formmethod="post">
                                 <?php se($account['account_number']);?>
                             </button>
                         </form>
