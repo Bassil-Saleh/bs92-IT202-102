@@ -70,6 +70,7 @@ nav.dashboard_menu li a:hover {
 /* Login page elements */
 .one_line_field {
   margin: 8px 24px;
+  font-family:'Courier New', Courier, monospace;
 }
 .submit_button {
   margin: 8px 24px;
@@ -241,6 +242,7 @@ input.radio_option {
 }
 select {
   margin: 8px 24px;
+  font-family:'Courier New', Courier, monospace;
 }
 </style>
 <nav class="navigation_bar">
