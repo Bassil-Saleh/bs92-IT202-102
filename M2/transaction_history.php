@@ -49,9 +49,32 @@ if (isset($_POST)) {
             </tr>
         <?php else:?>
             <?php foreach($records as $transaction):?>
+                <!-- Retrieve the account #'s associated with the account_src and account_dest of each transaction -->
+                <?php
+                    $source_id = $transaction['account_src'];
+                    $destination_id = $transaction['account_dest'];
+                    $stmt = $db->prepare("SELECT `account_number` FROM `Accounts` WHERE `id` = :source_id");
+                    try {
+                        // Retrieve the account # associated with the source account
+                        $stmt->execute(['source_id' => $source_id]);
+                        $result = $stmt->fetch();
+                        $source_account_num = $result['account_number'];
+                    } catch (Exception $e) {
+                        echo var_dump($e);
+                    }
+                    $stmt = $db->prepare("SELECT `account_number` FROM `Accounts` WHERE `id` = :destination_id");
+                    try {
+                        // Retrieve the account # associated with the destination account
+                        $stmt->execute(['destination_id' => $destination_id]);
+                        $result = $stmt->fetch();
+                        $destination_account_num = $result['account_number'];
+                    } catch (Exception $e) {
+                        echo var_dump($e);
+                    }
+                ?>
                 <tr>
-                    <td><?php se($transaction['account_src']);?></td>
-                    <td><?php se($transaction['account_dest']);?></td>
+                    <td><?php se($source_account_num);?></td>
+                    <td><?php se($destination_account_num);?></td>
                     <td><?php se($transaction['transaction_type']);?></td>
                     <td><?php se($transaction['balance_change']);?></td>
                     <td><?php se($transaction['created']);?></td>
