@@ -1,7 +1,33 @@
 <?php
 require(__DIR__ . "/partials/nav.php");
 ?>
+<?php
+// Retrieve the bank account #'s associated with the logged in user
+// and populate the dropdown menu with them.
+$username = $_SESSION["user"]["username"];
+$db = getDB();
+// Retrieve the user's ID # from the `Users` table
+$stmt = $db->prepare("SELECT `id` FROM `Users` WHERE `username` = :username");
+try {
+    $stmt->execute(['username' => $username]);
+    $result = $stmt->fetch();
+    $user_id = $result['id'];
+    // echo $user_id;
+    // Now retrieve the bank account #'s associated with the logged in user
+    $stmt = $db->prepare("SELECT `account_number` FROM `Accounts` WHERE `user_id` = :user_id");
+    $found = $stmt->execute(['user_id' => $user_id]);
+    if ($found) {
+        $records = $stmt->fetchALL(PDO::FETCH_ASSOC);
+        // echo var_dump($records);
+    }
+} catch (Exception $e) {
+    echo var_dump($e);
+}
+?>
 <h1 class="page_name_header">Deposit and Withdraw</h1>
+<?php if(empty($records)):?>
+    <h3 class="page_name_header">No account number(s) found under your name.</h3>
+<?php else:?>
 <h3 class="page_name_header">I want to:</h3>
 <form id="deposit_or_withdraw" class="binary_selection">
     <input class="radio_option" type="radio" id="deposit" name="select_deposit_or_withdraw">
@@ -11,11 +37,11 @@ require(__DIR__ . "/partials/nav.php");
     <label for="account_numbers"><h3 class="page_name_header">Deposit to/Withdraw from Account #:</h3></label>
     <select name="account_numbers" id="account_numbers" class="dropdown_menu">
         <!-- Populate this dropdown menu with accounts associated with the logged in user -->
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
+        <?php foreach($records as $account):?>
+            <option><?php se($account['account_number']);?></option>
+        <?php endforeach;?>
     </select>
     <label for="amount_of_money"><h3 class="page_name_header">Deposit/Withdrawal Amount:</h3></label>
     <input id="amount_of_money" name="amount_of_money" class="one_line_field" type="number" value="0.01" min="0.01" step="0.01" required>
 </form>
+<?php endif;?>
