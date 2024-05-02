@@ -1,3 +1,27 @@
+<?php
+session_start();
+//Note: this is to resolve cookie issues with port numbers
+$domain = $_SERVER["HTTP_HOST"];
+if (strpos($domain, ":")) {
+    $domain = explode(":", $domain)[0];
+}
+$localWorks = true; //some people have issues with localhost for the cookie params
+//if you're one of those people make this false
+
+//this is an extra condition added to "resolve" the localhost issue for the session cookie
+/*if (($localWorks && $domain == "localhost") || $domain != "localhost") {
+    session_set_cookie_params([
+        "lifetime" => 60 * 60,
+        "path" => "/Project",
+        //"domain" => $_SERVER["HTTP_HOST"] || "localhost",
+        "domain" => $domain,
+        "secure" => true,
+        "httponly" => true,
+        "samesite" => "lax"
+    ]);
+}*/
+require_once(__DIR__ . "/../lib/functions.php");
+?>
 <style>
 /* Navigation bar styling: */
 nav.navigation_bar ul {
@@ -45,6 +69,7 @@ nav.dashboard_menu li a:hover {
 /* Login page elements */
 .one_line_field {
   margin: 8px 24px;
+  font-family:'Courier New', Courier, monospace;
 }
 .submit_button {
   margin: 8px 24px;
@@ -61,6 +86,7 @@ nav.dashboard_menu li a:hover {
   font-family:'Courier New', Courier, monospace;
 }
 .multiline_textfield {
+  margin: 8px 24px;
   font-family:'Courier New', Courier, monospace;
 }
 /* End of login page elements */
@@ -210,33 +236,15 @@ td {
   font-size: 16px;
   display: inline;
 }
-</style>
-
-<?php
-session_start();
-//Note: this is to resolve cookie issues with port numbers
-$domain = $_SERVER["HTTP_HOST"];
-if (strpos($domain, ":")) {
-    $domain = explode(":", $domain)[0];
+/* Deposit and Withdraw page */
+input.radio_option {
+  margin: 8px 0px 8px 24px;
 }
-$localWorks = true; //some people have issues with localhost for the cookie params
-//if you're one of those people make this false
-
-//this is an extra condition added to "resolve" the localhost issue for the session cookie
-/*if (($localWorks && $domain == "localhost") || $domain != "localhost") {
-    session_set_cookie_params([
-        "lifetime" => 60 * 60,
-        "path" => "/Project",
-        //"domain" => $_SERVER["HTTP_HOST"] || "localhost",
-        "domain" => $domain,
-        "secure" => true,
-        "httponly" => true,
-        "samesite" => "lax"
-    ]);
-}*/
-require_once(__DIR__ . "/../lib/functions.php");
-
-?>
+select {
+  margin: 8px 24px;
+  font-family:'Courier New', Courier, monospace;
+}
+</style>
 <nav class="navigation_bar">
     <ul>
         <?php if (is_logged_in()) : ?>
