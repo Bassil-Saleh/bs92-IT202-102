@@ -58,9 +58,52 @@ if (isset($_POST) && !empty($_POST)) {
     else if ($option == "withdraw") {
         // echo $option;
         try {
-            ;
+            // Get the ID of the world account.
+            $stmt = $db->prepare("SELECT id FROM Accounts WHERE account_type = \"world\"");
+            $stmt->execute();
+            $result = $stmt->fetch();
+            $world_id = $result["id"];
+            // Get the ID of the user's selected account #.
+            $stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
+            $stmt->execute(['account_number' => $account_number]);
+            $result = $stmt->fetch();
+            $user_acct_id = $result["id"];
+            // Get the current balance of the user's selected account #.
+            $stmt = $db->prepare("SELECT `balance` FROM `Accounts` WHERE `account_number` = :account_number");
+            $stmt->execute(['account_number' => $account_number]);
+            $result = $stmt->fetch();
+            $user_acct_curr_bal = $result["balance"];
+            // Check if the user has sufficient funds to withdraw,
+            // otherwise abort with an error message.
+            if ($user_acct_curr_bal < $amount_of_money) {
+                echo "<div class=\"warning\">Request denied. The requested withdrawal is greater than your account's current balance.</div>";
+            }
+            else {
+                // Calculate the new balance of the user account.
+                $user_acct_curr_bal -= $amount_of_money;
+                // Deposit money to the world account (using $amount_of_money).
+                // World account balance change = (current world account balance) + (withdraw request amount)
+                $stmt = $db->prepare("SELECT `balance` FROM `Accounts` WHERE `account_type` = \"world\"");
+                $stmt->execute();
+                $result = $stmt->fetch();
+                $world_acct_curr_bal = $result["balance"];
+                $world_acct_curr_bal += $amount_of_money;
+                // Insert the 1st transaction pair into the `Transactions` table.
+                $stmt = $db->prepare("INSERT INTO `Transactions` (`account_src`, `account_dest`, `balance_change`, `transaction_type`, `memo`, `expected_total`) VALUES (:account_src, :account_dest, :balance_change, :transaction_type, :memo, :expected_total)");
+                $stmt->execute(['account_src' => $user_acct_id, 'account_dest' => $world_id, 'balance_change' => $amount_of_money, 'transaction_type' => $option, 'memo' => $memo, 'expected_total' => $world_acct_curr_bal]);
+                // Now update the world account's balance accordingly.
+                $stmt = $db->prepare("UPDATE Accounts SET balance = :new_bal WHERE id = :world_id");
+                $stmt->execute(['new_bal' => $world_acct_curr_bal, 'world_id' => $world_id]);
+                // Make the 2nd half of the transaction pair.
+                $stmt = $db->prepare("INSERT INTO `Transactions` (`account_src`, `account_dest`, `balance_change`, `transaction_type`, `memo`, `expected_total`) VALUES (:account_src, :account_dest, :balance_change, :transaction_type, :memo, :expected_total)");
+                $stmt->execute(['account_src' => $world_id, 'account_dest' => $user_acct_id, 'balance_change' => -$amount_of_money, 'transaction_type' => $option, 'memo' => $memo, 'expected_total' => $user_acct_curr_bal]);
+                // Update the user account's balance accordingly.
+                $stmt = $db->prepare("UPDATE Accounts SET balance = :new_bal WHERE account_number = :account_number");
+                $stmt->execute(['new_bal' => $user_acct_curr_bal, 'account_number' => $account_number]);
+                echo "<div class=\"success\">Withdrawal of $$amount_of_money from account #$account_number successfully made.</div>";
+            }
         } catch (Exception $e) {
-            ;
+            echo "<div class=\"warning\">Error occured in processing the withdrawal.</div>";
         }
     }
 }
