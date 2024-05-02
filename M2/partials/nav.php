@@ -21,7 +21,6 @@ $localWorks = true; //some people have issues with localhost for the cookie para
     ]);
 }*/
 require_once(__DIR__ . "/../lib/functions.php");
-
 ?>
 <style>
 /* Navigation bar styling: */
