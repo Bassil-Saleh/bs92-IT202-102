@@ -72,6 +72,6 @@ try {
     <label for="memo"><h3 class="page_name_header">Memo (optional):</h3></label>
     <textarea id="memo" name="memo" class="multiline_textfield"></textarea>
     <!--<input id="memo" name="memo" type="text">-->
-    <input class="submit_button" type=submit value="Submit">
+    <div><input class="submit_button" type=submit value="Submit"></div>
 </form>
 <?php endif;?>
