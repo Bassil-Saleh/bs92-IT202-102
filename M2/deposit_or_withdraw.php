@@ -93,7 +93,7 @@ try {
     <h3 class="page_name_header">No account number(s) found under your name.</h3>
 <?php else:?>
 <h3 class="page_name_header">I want to:</h3>
-<form id="deposit_or_withdraw" class="binary_selection" action="deposit.php" method="POST">
+<form id="deposit_or_withdraw" class="binary_selection" action="deposit_or_withdraw.php" method="POST">
     <input class="radio_option" type="radio" id="deposit" name="select_deposit_or_withdraw" value="deposit" required>
     <label for="deposit">Make a deposit</label>
     <input class="radio_option" type="radio" id="withdraw" name="select_deposit_or_withdraw" value="withdraw" required>
