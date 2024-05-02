@@ -76,7 +76,7 @@ if (isset($_POST)) {
                     <td><?php se($source_account_num);?></td>
                     <td><?php se($destination_account_num);?></td>
                     <td><?php se($transaction['transaction_type']);?></td>
-                    <td><?php se($transaction['balance_change']);?></td>
+                    <td><?php se("$" . substr($transaction['balance_change'], 0, -2));?></td>
                     <td><?php se($transaction['created']);?></td>
                     <td><?php se($transaction['expected_total']);?></td>
                     <td><?php se($transaction['memo']);?></td>

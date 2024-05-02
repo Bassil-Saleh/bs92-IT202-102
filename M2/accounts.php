@@ -54,7 +54,7 @@ try {
                     </td>
                     <!--<td><a href="transaction_history.php"></a></td>-->
                     <td><?php se($account['account_type']);?></td>
-                    <td><?php se($account['balance']);?></td>
+                    <td><?php se("$" . substr($account['balance'], 0, -2));?></td>
                     <td><?php se($account['modified']);?></td>
                 </tr>
             <?php endforeach;?>
