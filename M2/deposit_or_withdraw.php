@@ -76,7 +76,7 @@ if (isset($_POST) && !empty($_POST)) {
             // Check if the user has sufficient funds to withdraw,
             // otherwise abort with an error message.
             if ($user_acct_curr_bal < $amount_of_money) {
-                echo "<div class=\"warning\">Request denied. The requested withdrawal ($$amount_of_money) is greater than your account's current balance ($$user_acct_curr_bal).</div>";
+                echo "<div class=\"warning\">Request denied. The requested withdrawal ($$amount_of_money) is greater than your account's current balance " . "($" . substr($user_acct_curr_bal, 0, -2) . ").";
             }
             else {
                 // Calculate the new balance of the user account.
@@ -154,7 +154,7 @@ try {
             // $account_string = se($account['account_number']);
             ?>
             <option value="<?php se($account['account_number']);?>">
-                <?php se($account['account_number'] . " (current balance: $" . $current_balance . ")");?>
+                <?php se($account['account_number'] . " (current balance: $" . substr($current_balance, 0, -2) . ")");?>
             </option>
         <?php endforeach;?>
     </select>
