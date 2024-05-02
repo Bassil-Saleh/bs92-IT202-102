@@ -49,6 +49,8 @@ if (isset($_POST) && !empty($_POST)) {
             // Now update the user account's balance after inserting the 2nd half of the transaction pair.
             $stmt = $db->prepare("UPDATE Accounts SET balance = :new_bal WHERE account_number = :account_number");
             $stmt->execute(['new_bal' => $user_acct_curr_bal, 'account_number' => $account_number]);
+            
+            echo "<div class=\"success\">Deposit of $$amount_of_money to account #$account_number successfully made.</div>";
         } catch (Exception $e) {
             echo "<div class=\"warning\">An error occured when attempting to perform your deposit.</div>";
         }
