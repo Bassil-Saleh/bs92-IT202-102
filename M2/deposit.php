@@ -2,6 +2,11 @@
 require(__DIR__ . "/partials/nav.php");
 ?>
 <?php
+if (isset($_POST) && !empty($_POST)) {
+    echo var_dump($_POST);
+}
+?>
+<?php
 // Retrieve the bank account #'s associated with the logged in user
 // and populate the dropdown menu with them.
 $username = $_SESSION["user"]["username"];
@@ -29,19 +34,20 @@ try {
     <h3 class="page_name_header">No account number(s) found under your name.</h3>
 <?php else:?>
 <h3 class="page_name_header">I want to:</h3>
-<form id="deposit_or_withdraw" class="binary_selection">
-    <input class="radio_option" type="radio" id="deposit" name="select_deposit_or_withdraw">
+<form id="deposit_or_withdraw" class="binary_selection" action="deposit.php" method="POST">
+    <input class="radio_option" type="radio" id="deposit" name="select_deposit_or_withdraw" value="deposit">
     <label for="deposit">Make a deposit</label>
-    <input class="radio_option" type="radio" id="withdraw" name="select_deposit_or_withdraw">
+    <input class="radio_option" type="radio" id="withdraw" name="select_deposit_or_withdraw" value="withdraw">
     <label for="withdraw">Make a withdrawal</label>
     <label for="account_numbers"><h3 class="page_name_header">Deposit to/Withdraw from Account #:</h3></label>
     <select name="account_numbers" id="account_numbers" class="dropdown_menu">
         <!-- Populate this dropdown menu with accounts associated with the logged in user -->
         <?php foreach($records as $account):?>
-            <option><?php se($account['account_number']);?></option>
+            <option value="<?php se($account['account_number']);?>"><?php se($account['account_number']);?></option>
         <?php endforeach;?>
     </select>
     <label for="amount_of_money"><h3 class="page_name_header">Deposit/Withdrawal Amount:</h3></label>
     <input id="amount_of_money" name="amount_of_money" class="one_line_field" type="number" value="0.01" min="0.01" step="0.01" required>
+    <input class="submit_button" type=submit value="Submit">
 </form>
 <?php endif;?>
