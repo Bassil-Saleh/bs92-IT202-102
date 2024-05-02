@@ -76,7 +76,7 @@ if (isset($_POST) && !empty($_POST)) {
             // Check if the user has sufficient funds to withdraw,
             // otherwise abort with an error message.
             if ($user_acct_curr_bal < $amount_of_money) {
-                echo "<div class=\"warning\">Request denied. The requested withdrawal is greater than your account's current balance.</div>";
+                echo "<div class=\"warning\">Request denied. The requested withdrawal ($$amount_of_money) is greater than your account's current balance ($$user_acct_curr_bal).</div>";
             }
             else {
                 // Calculate the new balance of the user account.
