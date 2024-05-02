@@ -8,7 +8,13 @@ if (isset($_POST) && !empty($_POST)) {
     $account_number = $_POST['account_numbers'];
     $amount_of_money = $_POST['amount_of_money'];
     echo "$option $account_number $amount_of_money";
+    if ($option == "deposit") {
+        // echo $option;
 
+    }
+    else if ($option == "withdraw") {
+        // echo $option;
+    }
 }
 ?>
 <?php
@@ -48,11 +54,24 @@ try {
     <select name="account_numbers" id="account_numbers" class="dropdown_menu">
         <!-- Populate this dropdown menu with accounts associated with the logged in user -->
         <?php foreach($records as $account):?>
-            <option value="<?php se($account['account_number']);?>"><?php se($account['account_number']);?></option>
+            <?php
+            // Get the current balance of each account.
+            $stmt = $db->prepare("SELECT `balance` FROM `Accounts` WHERE `account_number` = :account_number");
+            $stmt->execute(['account_number' => $account['account_number']]);
+            $result = $stmt->fetch();
+            $current_balance = $result['balance'];
+            // $account_string = se($account['account_number']);
+            ?>
+            <option value="<?php se($account['account_number']);?>">
+                <?php se($account['account_number'] . " (current balance: $" . $current_balance . ")");?>
+            </option>
         <?php endforeach;?>
     </select>
     <label for="amount_of_money"><h3 class="page_name_header">Amount ($):</h3></label>
     <input id="amount_of_money" name="amount_of_money" class="one_line_field" type="number" value="0.01" min="0.01" step="0.01" required>
+    <label for="memo"><h3 class="page_name_header">Memo (optional):</h3></label>
+    <textarea id="memo" name="memo" class="multiline_textfield"></textarea>
+    <!--<input id="memo" name="memo" type="text">-->
     <input class="submit_button" type=submit value="Submit">
 </form>
 <?php endif;?>

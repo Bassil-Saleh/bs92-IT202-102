@@ -87,6 +87,7 @@ nav.dashboard_menu li a:hover {
   font-family:'Courier New', Courier, monospace;
 }
 .multiline_textfield {
+  margin: 8px 24px;
   font-family:'Courier New', Courier, monospace;
 }
 /* End of login page elements */
