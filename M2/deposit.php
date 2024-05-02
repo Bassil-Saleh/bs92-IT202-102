@@ -4,13 +4,50 @@ require(__DIR__ . "/partials/nav.php");
 <?php
 if (isset($_POST) && !empty($_POST)) {
     // echo var_dump($_POST);
+    $db = getDB();
     $option = $_POST['select_deposit_or_withdraw'];
     $account_number = $_POST['account_numbers'];
     $amount_of_money = $_POST['amount_of_money'];
-    echo "$option $account_number $amount_of_money";
+    $memo = $_POST['memo'];
+    // echo "$option $account_number $amount_of_money !$memo";
     if ($option == "deposit") {
-        // echo $option;
-
+        // Get the ID of the world account.
+        $stmt = $db->prepare("SELECT id FROM Accounts WHERE account_type = \"world\"");
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $world_id = $result["id"];
+        // Get the ID of the user's selected account #.
+        $stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
+        $stmt->execute(['account_number' => $account_number]);
+        $result = $stmt->fetch();
+        $user_acct_id = $result["id"];
+        // Withdraw money from the world account (using $amount_of_money).
+        // World account balance change = (current world account balance) - (deposit request amount)
+        $stmt = $db->prepare("SELECT `balance` FROM `Accounts` WHERE `account_type` = \"world\"");
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $world_acct_curr_bal = $result["balance"];
+        $world_acct_curr_bal -= $amount_of_money;
+        // Get the current balance of the user's selected account # and calculate the new balance.
+        $stmt = $db->prepare("SELECT `balance` FROM `Accounts` WHERE `account_number` = :account_number");
+        $stmt->execute(['account_number' => $account_number]);
+        $result = $stmt->fetch();
+        $user_acct_curr_bal = $result["balance"];
+        $user_acct_curr_bal += $amount_of_money;
+        // Insert the 1st transaction pair into the `Transactions` table.
+        $stmt = $db->prepare("INSERT INTO `Transactions` (`account_src`, `account_dest`, `balance_change`, `transaction_type`, `memo`, `expected_total`) VALUES (:account_src, :account_dest, :balance_change, :transaction_type, :memo, :expected_total)");
+        $stmt->execute(['account_src' => $user_acct_id, 'account_dest' => $world_id, 'balance_change' => -$amount_of_money, 'transaction_type' => $option, 'memo' => $memo, 'expected_total' => $world_acct_curr_bal]);
+        
+        // Now update the world account's balance after inserting the 1st half of the transaction pair.
+        $stmt = $db->prepare("UPDATE Accounts SET balance = :new_bal WHERE id = :world_id");
+        $stmt->execute(["new_bal" => $world_acct_curr_bal, "world_id" => $world_id]);
+        
+        // Make the 2nd half of the transaction pair.
+        $stmt = $db->prepare("INSERT INTO `Transactions` (`account_src`, `account_dest`, `balance_change`, `transaction_type`, `memo`, `expected_total`) VALUES (:account_src, :account_dest, :balance_change, :transaction_type, :memo, :expected_total)");
+        $stmt->execute(['account_src' => $world_id, 'account_dest' => $user_acct_id, 'balance_change' => $amount_of_money, 'transaction_type' => $option, 'memo' => $memo, 'expected_total' => $user_acct_curr_bal]);
+        // Now update the user account's balance after inserting the 2nd half of the transaction pair.
+        $stmt = $db->prepare("UPDATE Accounts SET balance = :new_bal WHERE account_number = :account_number");
+        $stmt->execute(['new_bal' => $user_acct_curr_bal, 'account_number' => $account_number]);
     }
     else if ($option == "withdraw") {
         // echo $option;
