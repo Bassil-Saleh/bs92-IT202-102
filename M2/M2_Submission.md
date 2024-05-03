@@ -1,6 +1,6 @@
 <table><tr><td> <em>Assignment: </em> IT202 Milestone 2 Bank Project</td></tr>
 <tr><td> <em>Student: </em> Bassil Saleh (bs92)</td></tr>
-<tr><td> <em>Generated: </em> 5/2/2024 7:12:41 PM</td></tr>
+<tr><td> <em>Generated: </em> 5/2/2024 9:40:20 PM</td></tr>
 <tr><td> <em>Grading Link: </em> <a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IT202-102-S2024/it202-milestone-2-bank-project/grade/bs92" target="_blank">Grading</a></td></tr></table>
 <table><tr><td> <em>Instructions: </em> <ol><li>Checkout Milestone2 branch</li><li>Create a new markdown file called milestone2.md</li><li>git add/commit/push immediate</li><li>Fill in the below deliverables</li><li>At the end copy the markdown and paste it into milestone2.md</li><li>Add/commit/push the changes to Milestone2</li><li>PR Milestone2 to dev and verify</li><li>PR dev to prod and verify</li><li>Checkout dev locally and pull changes to get ready for Milestone 3</li><li>Submit the direct link to this new milestone2.md file from your GitHub prod branch to Canvas</li></ol><p>Note: Ensure all images appear properly on github and everywhere else. Images are only accepted from dev or prod, not local host. All website links must be from prod (you can assume/infer this by getting your dev URL and changing dev to prod).</p></td></tr></table>
 <table><tr><td> <em>Deliverable 1: </em> Create Accounts table and setup </td></tr><tr><td><em>Status: </em> <img width="100" height="20" src="https://user-images.githubusercontent.com/54863474/211707773-e6aef7cb-d5b2-4053-bbb1-b09fc609041e.png"></td></tr>
@@ -147,7 +147,7 @@
 <tr><td><img width="768px" src="https://firebasestorage.googleapis.com/v0/b/learn-e1de9.appspot.com/o/assignments%2Fbs92%2F2024-05-02T22.40.20M2_Project_View_02.png.webp?alt=media&token=bac4d106-e12f-4b1c-9986-60d351145024"/></td></tr>
 <tr><td> <em>Caption:</em> <p>Screenshot of closed issues from GitHub project board (part 2).<br></p>
 </td></tr>
-<tr><td><img width="768px" src="https://firebasestorage.googleapis.com/v0/b/learn-e1de9.appspot.com/o/assignments%2Fbs92%2F2024-05-02T23.12.24M2_Project_View_03.png.webp?alt=media&token=5f93410d-f92b-46bf-9c26-3ed399d52130"/></td></tr>
+<tr><td><img width="768px" src="https://firebasestorage.googleapis.com/v0/b/learn-e1de9.appspot.com/o/assignments%2Fbs92%2F2024-05-03T01.39.51M2_Project_View_03.png.webp?alt=media&token=d838634e-0bd0-4df7-a5f0-9b1b990a8b0d"/></td></tr>
 <tr><td> <em>Caption:</em> <p>Screenshot of closed issues from GitHub project board (part 3).<br></p>
 </td></tr>
 </table></td></tr>
