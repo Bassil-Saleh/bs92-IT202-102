@@ -86,33 +86,38 @@ if (isset($_POST["save"])) {
     $new_password = se($_POST, "newPassword", null, false);
     $confirm_password = se($_POST, "confirmPassword", null, false);
     if (!empty($current_password) && !empty($new_password) && !empty($confirm_password)) {
-        if ($new_password === $confirm_password) {
-            //TODO validate current
-            $stmt = $db->prepare("SELECT password from Users where id = :id");
-            try {
-                $stmt->execute([":id" => get_user_id()]);
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                if (isset($result["password"])) {
-                    if (password_verify($current_password, $result["password"])) {
-                        $query = "UPDATE Users set password = :password where id = :id";
-                        $stmt = $db->prepare($query);
-                        $stmt->execute([
-                            ":id" => get_user_id(),
-                            ":password" => password_hash($new_password, PASSWORD_BCRYPT)
-                        ]);
-
-                        flash("Password reset.", "success");
-                    } else {
-                        flash("Cannot reset your password because the wrong password was entered in the \"Current Password\" field.", "warning");
+        if ((strlen($new_password) < 8) || (strlen($confirm_password) < 8)) {
+            flash("New password must be at least 8 characters long.", "warning");
+        }
+        else {
+            if ($new_password === $confirm_password) {
+                //TODO validate current
+                $stmt = $db->prepare("SELECT password from Users where id = :id");
+                try {
+                    $stmt->execute([":id" => get_user_id()]);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if (isset($result["password"])) {
+                        if (password_verify($current_password, $result["password"])) {
+                            $query = "UPDATE Users set password = :password where id = :id";
+                            $stmt = $db->prepare($query);
+                            $stmt->execute([
+                                ":id" => get_user_id(),
+                                ":password" => password_hash($new_password, PASSWORD_BCRYPT)
+                            ]);
+    
+                            flash("Password reset.", "success");
+                        } else {
+                            flash("Cannot reset your password because the wrong password was entered in the \"Current Password\" field.", "warning");
+                        }
                     }
+                } catch (PDOException $e) {
+                    // Exception class doesn't have an errorInfo property, so $e
+                    // was changed to a PDOException object.
+                    echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
                 }
-            } catch (PDOException $e) {
-                // Exception class doesn't have an errorInfo property, so $e
-                // was changed to a PDOException object.
-                echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            } else {
+                flash("New passwords don't match.", "warning");
             }
-        } else {
-            flash("New passwords don't match.", "warning");
         }
     }
 }
@@ -140,11 +145,11 @@ $username = get_username();
     </div>
     <div class="mb-3">
         <label for="np">New Password:</label>
-        <input class="one_line_textfield" type="password" name="newPassword" id="np" />
+        <input class="one_line_textfield" type="password" name="newPassword" id="np" required minlength="8" />
     </div>
     <div class="mb-3">
         <label for="conp">Confirm New Password:</label>
-        <input class="one_line_textfield" type="password" name="confirmPassword" id="conp" />
+        <input class="one_line_textfield" type="password" name="confirmPassword" id="conp" required minlength="8" />
     </div>
     <input id="update_profile_button" class="submit_button" type="submit" value="Update Profile" name="save" />
 </form>
